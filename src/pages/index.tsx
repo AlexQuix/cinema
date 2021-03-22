@@ -1,6 +1,8 @@
 import React from "react";
 
+// COMPONENTS
 import Navegation from "@components/navegation";
+import CoverPage from "@components/cover-page";
 
 function Home(){
     return (
@@ -9,7 +11,7 @@ function Home(){
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"></link>
             <div>
                 <Navegation/>
-                <h1>Hola mundo!</h1>
+                <CoverPage/>
             </div>
         </>
     )

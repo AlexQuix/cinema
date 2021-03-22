@@ -4,6 +4,7 @@
     font-size: 20px;
     --color-dark-background: #353535;
     --color-btn-ligth: #46A3FF;
+    --color-text-highlight: #46A3FF;
     --color-text-opaque: #9f9f9f;
     --color-text-light: #e5e5e5;
     --color-light: #fff;
@@ -19,4 +20,5 @@
 body{
     width: 100%;
     position: relative;
+    background: var(--color-dark-background);
 }
