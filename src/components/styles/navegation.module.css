@@ -1,0 +1,79 @@
+#container{
+    width: 100%;
+    height: 60px;
+    padding: 10px 30px;
+    background: #353535;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+#wrapper-btn-pages{
+    display: flex;
+    position: relative;
+}
+.btn{
+    cursor: pointer;
+    max-height: 100%;
+    margin-left: 30px;
+    transform: scale(1);
+    transition: 0.8s;
+}
+.btn > div{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn > div > svg{
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: var(--color-text-opaque);
+    transition: 0.8s;
+}
+.btn > div > p{
+    font-size: 1rem;
+    font-weight: 500;
+    padding-left: 10px;
+    color: var(--color-text-opaque);
+    transition: 0.4;
+}
+.btn:hover{
+    transform: scale(1.1);
+}
+.btn:hover > div > svg,
+.btn:hover > div > p{
+    fill: var(--color-light);
+    color: var(--color-light);
+}
+
+#home-page > header{
+    width: 150px;
+    height: 100%;
+    padding-bottom: 5px;
+    margin-right: 20px;
+}
+#home-page > header > svg{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+#wrapper-search{
+    width: auto;
+    height: 100%;
+    position: relative;
+    display: flex;
+}
+#btn-search{
+    margin-left: 0px;
+    margin-right: 20px;
+}
+#btn-search > div{
+    width: 43px;
+    border-radius: 50px;
+    background: var(--color-btn-ligth);
+}
+#btn-search > div > svg{
+    fill: var(--color-light);
+}
