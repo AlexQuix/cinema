@@ -2,8 +2,11 @@
 
 :root{
     font-size: 20px;
+    --color-dark-second-background: #262626;
     --color-dark-background: #353535;
     --color-btn-ligth: #46A3FF;
+    --color-btn-highlight: #E5AD1B;
+    --color-stars: #E5AD1B;
     --color-text-highlight: #46A3FF;
     --color-text-opaque: #9f9f9f;
     --color-text-light: #e5e5e5;

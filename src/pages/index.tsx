@@ -1,8 +1,9 @@
 import React from "react";
 
 // COMPONENTS
-import Navegation from "@components/navegation";
-import CoverPage from "@components/cover-page";
+import Navegation from "@container/navegation";
+import CoverPage from "@container/cover-page";
+
 
 function Home(){
     return (
