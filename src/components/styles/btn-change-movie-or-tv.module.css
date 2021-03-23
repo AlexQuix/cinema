@@ -1,0 +1,87 @@
+#wrapper{
+    cursor: pointer;
+    width: fit-content;
+    background: var(--color-text-light);
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+}
+.btn-movie,
+.btn-tv{
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    background: none;
+    position: relative;
+    transition: 0.5s;
+    z-index: 100;
+}
+.btn-movie > svg,
+.btn-tv > svg{
+    width: 1rem;
+    height: 1rem;
+    fill: var(--color-text-opaque);
+    transition: 0.5s;
+}
+.btn-movie::before{
+    content: "movies";
+    padding: 7px 15px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 5px;
+    color: var(--color-light);
+    background: var(--color-dark-second-background);
+    position: absolute;
+    top: 2.5rem;
+    left: -10px;
+    z-index: 50;
+    visibility: hidden;
+}
+.btn-tv::before{
+    content: "TV shows";
+    width: max-content;
+    padding: 7px 15px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 5px;
+    color: var(--color-light);
+    background: var(--color-dark-second-background);
+    position: absolute;
+    top: 2.5rem;
+    left: -17px;
+    z-index: 50;
+    visibility: hidden;
+}
+.btn-movie::after,
+.btn-tv::after{
+    content: "";
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background: var(--color-dark-second-background);
+    position: absolute;
+    top: 2.2rem;
+    visibility: hidden;
+}
+.btn-movie:hover::before,
+.btn-tv:hover::before{
+    visibility: visible;
+}
+.btn-movie:hover::after,
+.btn-tv:hover::after{
+    visibility: visible;
+}
+
+
+.wrapper-background{
+    width: 50%;
+    height: 100%;
+    border-radius: 50px;
+    box-shadow: 1px 1px 10px #353535b0, -1px -1px 10px #353535b0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition: 0.7s;
+}
