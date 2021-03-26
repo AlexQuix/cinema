@@ -14,7 +14,7 @@
     background: none;
     position: relative;
     transition: 0.5s;
-    z-index: 100;
+    z-index: 200;
 }
 .btn-movie > svg,
 .btn-tv > svg{
@@ -84,4 +84,14 @@
     top: 0px;
     left: 0px;
     transition: 0.7s;
+}
+
+.disable{
+    width: 100%;
+    height: 100%;
+    background: #3535356e;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 300;
 }

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import style from "./styles/btn-change-movie-or-tv.module.css";
 
-function BtnChangeMovieOrTV({changeData}:{changeData:(type:"movie"|"tv")=>void}){
+function BtnChangeMovieOrTV({changeData, enableBtn}:{enableBtn:boolean,changeData:(type:"movie"|"tv")=>void}){
     let [btn, setBtn] = useState("btn-movie");
     function handleClick(typeBtn:"btn-movie"|"btn-tv"){
         if(btn === typeBtn){
@@ -19,6 +19,10 @@ function BtnChangeMovieOrTV({changeData}:{changeData:(type:"movie"|"tv")=>void})
     }
     return (
         <div id={style["wrapper"]}>
+            {!enableBtn?
+                <span className={style["disable"]}></span>
+                :undefined
+            }
             <span 
                 id='btn-movie' 
                 className={style["btn-movie"]}
