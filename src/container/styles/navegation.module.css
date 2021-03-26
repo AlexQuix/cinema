@@ -3,9 +3,10 @@
     height: 60px;
     padding: 10px 30px;
     background: var(--color-dark-background);
-    position: relative;
+    position: fixed;
     display: flex;
     justify-content: space-between;
+    z-index: 800;
 }
 #wrapper-btn-pages{
     display: flex;

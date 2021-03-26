@@ -9,6 +9,7 @@ import BtnSlideControl from "@components/btn-slide-control";
 
 // COMPONENT
 function SlidePopulation(){
+    let btnSlideControlStyle = {width: "20vw", height:"400px", distance:40, btnWidth:30};
     let statePackData:Search.MovieAndTV[] = [];
     let stateSlide:{idFocus:number, direction?:"left"|"right"} = {idFocus:0, direction: undefined};
     let stateType:"movie"|"tv" = "movie";
@@ -76,8 +77,8 @@ function SlidePopulation(){
                 <section 
                     className={style["container-slide"]}
                 >
-                    <BtnSlideControl direction="left" slideControl={slideControl}/>
-                    <BtnSlideControl direction="right" slideControl={slideControl}/>
+                    <BtnSlideControl style={btnSlideControlStyle} direction="left" slideControl={slideControl}/>
+                    <BtnSlideControl style={{right:"0px", ...btnSlideControlStyle}} direction="right" slideControl={slideControl}/>
                     <WrapperCard packData={packData} slide={slide} type={type}/>
                 </section>:undefined
             }
