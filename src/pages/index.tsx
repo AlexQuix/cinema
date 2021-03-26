@@ -3,7 +3,7 @@ import React from "react";
 // COMPONENTS
 import Navegation from "@container/navegation";
 import CoverPage from "@container/cover-page";
-
+import Popular from "@container/popular";
 
 function Home(){
     return (
@@ -13,6 +13,7 @@ function Home(){
             <div>
                 <Navegation/>
                 <CoverPage/>
+                <Popular/>
             </div>
         </>
     )

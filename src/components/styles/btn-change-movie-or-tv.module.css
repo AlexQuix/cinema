@@ -14,7 +14,7 @@
     background: none;
     position: relative;
     transition: 0.5s;
-    z-index: 200;
+    z-index: 350;
 }
 .btn-movie > svg,
 .btn-tv > svg{

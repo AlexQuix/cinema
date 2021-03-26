@@ -1,0 +1,40 @@
+.container{
+    width: 100%;
+    padding-top: 80px;
+}
+#wrapper-title{
+    width: auto;
+    padding: 0px 40px;
+    display: flex;
+    align-items: center;
+}
+#wrapper-title > header{
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+}
+#wrapper-title > header > svg{
+    height: 1.5rem;
+    fill: var(--color-stars);
+}
+#wrapper-title > header > h1{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-left: 10px;
+    color: var(--color-light);
+}
+
+
+.container-slide{
+    width: 100%;
+    height: auto;
+    padding: 40px 0px;
+    position: relative;
+    overflow: hidden;
+}
+.wrapper-cards{
+    width: auto;
+    display: inline-flex;
+    position: relative;
+    transition: 0.3s;
+}
