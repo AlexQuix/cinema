@@ -2,6 +2,8 @@ import React from "react";
 
 import style from "./styles/navegation.module.css";
 
+import BtnSearch from "@components/btn-search";
+
 function Navegation(){
     return (
         <nav
@@ -61,20 +63,7 @@ function Navegation(){
                     </div>
                 </span>
             </section>
-            <section
-                id={style["wrapper-search"]}
-            >
-                <span
-                    id={style["btn-search"]}
-                    className={style["btn"]}
-                >
-                    <div>
-                        <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M42.2552 33.123L35.9619 28.3912C37.5352 25.6873 38.2095 22.5327 38.2095 19.1528C38.2095 8.56255 29.6686 0.000183105 19.1048 0.000183105C8.54095 0.000183105 0 8.56255 0 19.1528C0 29.743 8.54095 38.3054 19.1048 38.3054C22.4762 38.3054 25.3981 37.4041 28.32 36.0522L33.04 42.3613C35.5124 45.5158 40.2324 45.9665 43.1543 43.0373C45.8514 40.3334 45.6267 35.6015 42.2552 33.123ZM19.1048 33.799C11.0133 33.799 4.49524 27.2646 4.49524 19.1528C4.49524 11.0411 11.0133 4.50669 19.1048 4.50669C27.1962 4.50669 33.7143 11.0411 33.7143 19.1528C33.7143 27.2644 27.1962 33.799 19.1048 33.799Z"/>
-                        </svg>
-                    </div>
-                </span>
-            </section>
+            <BtnSearch/>
         </nav>
     )
 };
