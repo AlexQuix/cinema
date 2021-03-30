@@ -8,8 +8,9 @@
     --color-dark-second-background: #262626;
     --color-btn-ligth: #46A3FF;
     --color-btn-highlight: #E5AD1B;
-    --color-stars: #E5AD1B;
     --color-boder-botom: #9c9c9c;
+    --color-stars: #E5AD1B;
+    --color-text-title-light: #83cdef;
     --color-text-highlight: #46A3FF;
     --color-text-opaque: #9f9f9f;
     --color-text-light: #e5e5e5;
@@ -27,4 +28,12 @@ body{
     width: 100%;
     position: relative;
     background: var(--color-dark-background);
+}
+body::-webkit-scrollbar{
+    width: 10px;
+    background: transparent;
+}
+body::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background: #c2c2c2;
 }
