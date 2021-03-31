@@ -1,22 +1,67 @@
 import React, {useState, useEffect} from "react";
+import Next from "next/link";
 
 import style from "./styles/popular.module.css";
 
 // IMPORT COMPONENTS
 import BtnChangeMovieOrTV from "@components/btn-change-movie-or-tv";
-import WrapperCard from "@container/population-wrapper-card";
-import BtnSlideControl from "@components/btn-slide-control";
+import ContainerSlide from "@container/container-slide";
+import Card from "@components/population-card";
+
+interface ISlide{
+    idFocus:number, 
+    direction?:"left"|"right"
+}
+
+let slideStyles = <style>{`
+                        .left,
+                        .right{
+                            width: 20vw; 
+                            height: 400px;
+                            background: #35353582;
+                        }
+                        .left > div{
+                            width: 30px;
+                            left: 40px;
+                        }
+                        .right > div{
+                            width: 30px;
+                            right: 40px;
+                        }
+                        .left:hover > div{
+                            left: 20px;
+                        }
+                        .right:hover > div{
+                            right: 20px;
+                        }
+
+                        .left > div > svg,
+                        .right > div > svg{
+                            fill: var(--color-text-opaque);
+                        }
+                        .left:hover > div > svg,
+                        .right:hover > div > svg{
+                            fill: var(--color-light);
+                        }
+                    `}</style>;
 
 // COMPONENT
 function SlidePopulation(){
-    let btnSlideControlStyle = {width: "20vw", height:"400px", distance:40, btnWidth:30};
+    let slideInfo = {
+        increasePosx:60,
+        posxInit:20,
+        posxEnd:-520,
+        length: 9
+    };
     let statePackData:Search.MovieAndTV[] = [];
-    let stateSlide:{idFocus:number, direction?:"left"|"right"} = {idFocus:0, direction: undefined};
+    let stateSlide:ISlide= {idFocus:0,direction: undefined};
     let stateType:"movie"|"tv" = "movie";
+
     let [type, setType] = useState(stateType);
     let [slide, setSlide] = useState(stateSlide);
     let [packData, setPackData] = useState(statePackData);
     let [enableBtn, setEnableBtn] = useState(true);
+
     function slideControl(direction:"left"|"right"){
         if(direction === "left"){
             if(slide.idFocus > 0){
@@ -45,7 +90,9 @@ function SlidePopulation(){
         let resp = await fetch(urls[type]);
         let json = await resp.json();
         let result = json.results.slice(0, 10);
-        setPackData(result);
+        if(result){
+            setPackData(result);
+        }
     }
     function changeData(type:"movie"|"tv"){0
         setEnableBtn(false);
@@ -74,17 +121,27 @@ function SlidePopulation(){
                 <BtnChangeMovieOrTV enableBtn={enableBtn} changeData={changeData}/>
             </div>
             {(packData[0])?
-                <section 
-                    className={style["container-slide"]}
+                <ContainerSlide
+                    styles={slideStyles}
+                    slide={slide}
+                    slideInfo={slideInfo}
+                    slideControl={slideControl}
                 >
-                    <BtnSlideControl style={btnSlideControlStyle} direction="left" slideControl={slideControl}/>
-                    <BtnSlideControl style={{right:"0px", ...btnSlideControlStyle}} direction="right" slideControl={slideControl}/>
-                    <WrapperCard packData={packData} slide={slide} type={type}/>
-                </section>:undefined
+                    {packData.map((data, index)=>{
+                        let isFocus = (slide.idFocus === index)?true:false;
+                        return  (
+                            <Next href={`/${type}/${data.id}`} key={data.id}>
+                                <a>
+                                    <Card data={data} isFocus={isFocus} type={type}/>
+                                </a>
+                            </Next>
+                        );})}
+                </ContainerSlide>
+                :undefined
             }
         </section>
     )
-}
+};
 
 
 
