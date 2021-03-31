@@ -1,32 +1,15 @@
 import React from "react";
 
-import style from "./styles/btn-slide-control.module.css";
-
 interface Props{
-    style: {
-        width: string | number,
-        height: string | number,
-        right?: string,
-        distance: number;
-        btnWidth: number;
-    };
     direction:"left"|"right";
     slideControl:(direction:"left"|"right")=>void;
 }
 
-function BtnSlideDirection({style, direction, slideControl}:Props){
-    let configStyle = {
-        cursor: "pointer",
-        background: "#35353594",
-        display: "flex",
-        alignItems: "center",
-        zIndex: 300
-    }
+function BtnSlideDirection({direction, slideControl}:Props){
     return (<>
         <div
             className={direction}
             onClick={()=>{slideControl(direction)}}
-            style={{position: "absolute", ...configStyle, ...style}}
         >
             <div>
                 <svg width="57" height="206" viewBox="0 0 57 206" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,35 +18,41 @@ function BtnSlideDirection({style, direction, slideControl}:Props){
             </div>
         </div>
         <style jsx>{`
+            .left,
+            .right{
+                cursor: pointer;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                z-index: 300;
+            }
+            .left{
+                left: 0px;
+            }
+            .right{
+                right: 0px;
+            }
+
             .left > div,
             .right > div{
-                width: ${style.btnWidth}px;
                 transform: scale(1);
                 position: absolute;
-                transition: 0.5s
-            }
-            .left > div{
-                left: ${style.distance}px;
+                transition: 0.5s;
             }
             .right > div{
-                right: ${style.distance}px;
                 transform: rotateZ(180deg) scale(1);
             }
             .left:hover > div{
-                left: ${(style.distance / 2)}px;
                 transform: scale(1.1);
             }
             .right:hover > div{
-                right: ${(style.distance / 2)}px;
                 transform: rotateZ(180deg) scale(1.1);
             }
-            
-            
+
             .left > div > svg,
             .right > div > svg{
                 width: 100%;
                 height: 100%;
-                fill: var(--color-text-opaque);
                 transition: 0.5s;
             }
             .left:hover > div > svg,
