@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import Next from "next/link";
+import useSWR from "swr";
+import LINK from "next/link";
 
 import style from "./styles/popular.module.css";
 
@@ -45,66 +46,45 @@ let slideStyles = <style>{`
                         }
                     `}</style>;
 
+function getUrl(type: "movie" | "tv"){
+    let urls = {
+        movie: process.env.NEXT_PUBLIC_URL_MOVIE + "popular" + process.env.NEXT_PUBLIC_API_KEY + "&language=en-US&page=1",
+        tv: process.env.NEXT_PUBLIC_URL_TV + "popular" + process.env.NEXT_PUBLIC_API_KEY + "&language=en-US&page=1"
+    };
+    return urls[type];
+}
+
 // COMPONENT
 function SlidePopulation(){
-    let slideInfo = {
-        increasePosx:60,
-        posxInit:20,
-        posxEnd:-520,
-        length: 9
-    };
-    let statePackData:Search.MovieAndTV[] = [];
     let stateSlide:ISlide= {idFocus:0,direction: undefined};
     let stateType:"movie"|"tv" = "movie";
 
     let [type, setType] = useState(stateType);
     let [slide, setSlide] = useState(stateSlide);
-    let [packData, setPackData] = useState(statePackData);
     let [enableBtn, setEnableBtn] = useState(true);
 
-    function slideControl(direction:"left"|"right"){
-        if(direction === "left"){
-            if(slide.idFocus > 0){
-                let id = --slide.idFocus;
-                setSlide({idFocus:id, direction});
-                return;
-            }
-            setSlide({idFocus:9, direction});
-            return
-        }
-        if(direction === "right"){
-            if(slide.idFocus < 9){
-                let id = ++slide.idFocus;
-                setSlide({idFocus:id, direction});
-                return;
-            }
-            setSlide({idFocus:0, direction});
-            return;
-        }
-    }
-    async function searchPackData(type: "movie"|"tv"){
-        let urls = {
-            movie: "https://api.themoviedb.org/3/movie/popular?api_key=36e9bc3df49bcf8ff1978a5075c591c1&language=en-US&page=1&region=sv",
-            tv: "https://api.themoviedb.org/3/tv/popular?api_key=36e9bc3df49bcf8ff1978a5075c591c1&language=en-US&page=1"
-        }
-        let resp = await fetch(urls[type]);
-        let json = await resp.json();
-        let result = json.results.slice(0, 10);
-        if(result){
-            setPackData(result);
-        }
-    }
-    function changeData(type:"movie"|"tv"){0
+    let {data, error} = useSWR(getUrl(type));
+
+    function changeData(type:"movie"|"tv"){
         setEnableBtn(false);
         setType(type as "movie");
-        searchPackData(type);
         setTimeout(()=>{
             setEnableBtn(true);
         }, 1700);
     }
-    useEffect(()=>{
-        searchPackData("movie");
-    }, []);
+    if(error){
+        return <div>ERROR</div>
+    }
+    if(!data){
+        return <div>Loading...</div>
+    }
+    let packData:Search.MovieAndTV[] = data.results.slice(0, 10);
+    let slideInfo = {
+        increasePosx:60,
+        posxInit:20,
+        posxEnd:-((60 * (packData.length-1))-20),
+        length: packData.length-1
+    };
     return (
         <section
             className={style["container"]}
@@ -123,24 +103,23 @@ function SlidePopulation(){
             {(packData[0])?
                 <ContainerSlide
                     styles={slideStyles}
-                    slide={slide}
                     slideInfo={slideInfo}
-                    slideControl={slideControl}
+                    state={[slide, setSlide]}
                 >
                     {packData.map((data, index)=>{
                         let isFocus = (slide.idFocus === index)?true:false;
                         return  (
-                            <Next href={`/${type}/${data.id}`} key={data.id}>
+                            <LINK href={`/${type}/${data.id}`} key={data.id}>
                                 <a>
                                     <Card data={data} isFocus={isFocus} type={type}/>
                                 </a>
-                            </Next>
+                            </LINK>
                         );})}
                 </ContainerSlide>
                 :undefined
             }
         </section>
-    )
+    );
 };
 
 
