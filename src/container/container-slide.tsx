@@ -6,27 +6,42 @@ import SlideWrapperCards from "@components/slide-wrapper-cards";
 interface Props{
     children:any;
     styles:JSX.Element;
-    slide:{
-        idFocus:number, 
-        direction?:"left"|"right"
-    };
     slideInfo:{
         increasePosx:number,
         posxInit:number,
         posxEnd:number,
         length:number,
     }
-    slideControl:(direction:"left"|"right")=>void;
+    state:[{idFocus:number, direction?:"left"|"right"}, (prop:any)=>void]
 };
 
 function ContainerSlide({
     children,
     styles,
-    slide,
     slideInfo,
-    slideControl
+    state
 }:Props){
-    
+    let [slide, setSlide] = state;
+    function slideControl(direction:"left"|"right"){
+        if(direction === "left"){
+            if(slide.idFocus > 0){
+                let id = --slide.idFocus;
+                setSlide({idFocus:id, direction});
+                return;
+            }
+            setSlide({idFocus:slideInfo.length, direction});
+            return
+        }
+        if(direction === "right"){
+            if(slide.idFocus < slideInfo.length){
+                let id = ++slide.idFocus;
+                setSlide({idFocus:id, direction});
+                return;
+            }
+            setSlide({idFocus:0, direction});
+            return;
+        }
+    }
     return(
         <section
             style={{
