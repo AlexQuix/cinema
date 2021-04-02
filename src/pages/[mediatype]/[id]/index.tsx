@@ -1,26 +1,32 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {InferGetServerSidePropsType, GetServerSideProps} from "next";
 
 import Navegation from "@container/navegation";
 import DetailsMedia from "@container/media-details";
 import Trailer from "@components/trailers";
+import ExhibitTrailer from "@components/exhibit-trailer";
 
 
 function Information({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movie.Details, mediatype:string, id:number, urlTrailer:string}){
-    function showTrailer(key:string){
+    let [trailer, setTrailer] = useState<Movie.Video|undefined>(undefined);
+    function showTrailer(trailer:Movie.Video){
         return function(){
-            console.log(key);
+            setTrailer(trailer);
         }
     }
     return(<>
         <link rel="preconnect" href="https://fonts.gstatic.com"/>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap&family=Bebas+Neue&display=swap&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
         <div
-            style={{background:"#1a1d29"}}
+            style={{background:"#1a1d29", position:"relative", overflow: "hidden"}}
         >
             <Navegation/>
             <DetailsMedia data={data} mediatype={mediatype}/>
             <Trailer url={urlTrailer} showTrailer={showTrailer}/>
+            {trailer?
+                <ExhibitTrailer trailer={trailer}  setTrailer={setTrailer}/>
+                :<div style={{paddingTop: "60px"}}></div>
+            } 
         </div>
     </>);
 }
