@@ -14,37 +14,38 @@ interface ISlide{
     direction?:"left"|"right"
 }
 
-let slideStyles = <style>{`
-                        .left,
-                        .right{
-                            width: 20vw; 
-                            height: 400px;
-                            background: #35353582;
-                        }
-                        .left > div{
-                            width: 30px;
-                            left: 40px;
-                        }
-                        .right > div{
-                            width: 30px;
-                            right: 40px;
-                        }
-                        .left:hover > div{
-                            left: 20px;
-                        }
-                        .right:hover > div{
-                            right: 20px;
-                        }
+let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
+    return `
+        #${btnLeft},
+        #${btnRight}{
+            width: 20vw; 
+            height: 400px;
+            background: #35353582;
+        }
+        #${btnLeft} > div{
+            width: 30px;
+            left: 40px;
+        }
+        #${btnRight} > div{
+            width: 30px;
+            right: 40px;
+        }
+        #${btnLeft}:hover > div{
+            left: 20px;
+        }
+        #${btnRight}:hover > div{
+            right: 20px;
+        }
 
-                        .left > div > svg,
-                        .right > div > svg{
-                            fill: var(--color-text-opaque);
-                        }
-                        .left:hover > div > svg,
-                        .right:hover > div > svg{
-                            fill: var(--color-light);
-                        }
-                    `}</style>;
+        #${btnLeft} > div > svg,
+        #${btnRight} > div > svg{
+            fill: var(--color-text-opaque);
+        }
+        #${btnLeft}:hover > div > svg,
+        #${btnRight}:hover > div > svg{
+            fill: var(--color-light);
+        }
+`}
 
 function getUrl(type: "movie" | "tv"){
     let urls = {

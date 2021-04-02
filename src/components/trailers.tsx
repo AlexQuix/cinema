@@ -7,59 +7,60 @@ interface ISlide{
 }
 
 import style from "./styles/trailer.module.css";
-let slideStyles = <style>{`
-                        .left,
-                        .right{
-                            width: 10vw; 
-                            height: 150px;
-                            z-index: 500;
-                        }
-                        .left > div{
-                            width: 20px;
-                            left: 30px;
-                        }
-                        .right > div{
-                            width: 20px;
-                            right: 30px;
-                        }
-                        .left:hover > div{
-                            left: 20px;
-                        }
-                        .right:hover > div{
-                            right: 20px;
-                        }
+let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
+    return `
+        #${btnLeft},
+        #${btnRight}{
+            width: 10vw; 
+            height: 150px;
+            z-index: 500;
+        }
+        #${btnLeft} > div{
+            width: 20px;
+            left: 30px;
+        }
+        #${btnRight} > div{
+            width: 20px;
+            right: 30px;
+        }
+        #${btnLeft}:hover > div{
+            left: 20px;
+        }
+        #${btnRight}:hover > div{
+            right: 20px;
+        }
 
-                        .left > div > svg,
-                        .right > div > svg{
-                            fill: var(--color-light);
-                        }
+        #${btnLeft} > div > svg,
+        #${btnRight} > div > svg{
+            fill: var(--color-light);
+        }
 
-                        @media (max-width: 780px){
-                            .left,
-                            .right{
-                                height: 120px;
-                            }
-                            .left > div{
-                                width: 18px;
-                                left: 30%;
-                            }
-                            .right > div{
-                                width: 18px;
-                                right: 30%;
-                            }
-                            .left:hover > div{
-                                width: 15px;
-                                left: 10%;
-                            }
-                            .right:hover > div{
-                                width: 15px;
-                                right: 10%;
-                            }
-                        }
-                        @media (max-width: 440px){
-                            
-                        }
-                    `}</style>;
+        @media (max-width: 780px){
+            #${btnLeft},
+            #${btnRight}{
+                height: 120px;
+            }
+            #${btnLeft} > div{
+                width: 18px;
+                left: 30%;
+            }
+            #${btnRight} > div{
+                width: 18px;
+                right: 30%;
+            }
+            #${btnLeft}:hover > div{
+                width: 15px;
+                left: 10%;
+            }
+            #${btnRight}:hover > div{
+                width: 15px;
+                right: 10%;
+            }
+        }
+        @media (max-width: 440px){
+            
+        }
+`}
 
 import ContainerSlide from "@container/container-slide";
 import ExhibitTrailer from "@components/exhibit-trailer";
