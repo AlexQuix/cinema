@@ -44,13 +44,6 @@ function ContainerSlide({
     }
     return(
         <section
-            style={{
-                width: "100%",
-                height: "auto",
-                padding: "40px 0px",
-                position: "relative",
-                overflow: "hidden"
-            }}
         >
             <BtnSlideControl direction="left" slideControl={slideControl}/>
             <BtnSlideControl direction="right" slideControl={slideControl}/>

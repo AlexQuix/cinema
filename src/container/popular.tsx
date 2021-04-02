@@ -101,21 +101,23 @@ function SlidePopulation(){
                 <BtnChangeMovieOrTV enableBtn={enableBtn} changeData={changeData}/>
             </div>
             {(packData[0])?
-                <ContainerSlide
-                    styles={slideStyles}
-                    slideInfo={slideInfo}
-                    state={[slide, setSlide]}
-                >
-                    {packData.map((data, index)=>{
-                        let isFocus = (slide.idFocus === index)?true:false;
-                        return  (
-                            <LINK href={`/${type}/${data.id}`} key={data.id}>
-                                <a>
-                                    <Card data={data} isFocus={isFocus} type={type}/>
-                                </a>
-                            </LINK>
-                        );})}
-                </ContainerSlide>
+                <div className={style["wrapper-cards"]}>
+                    <ContainerSlide
+                        styles={slideStyles}
+                        slideInfo={slideInfo}
+                        state={[slide, setSlide]}
+                    >
+                        {packData.map((data, index)=>{
+                            let isFocus = (slide.idFocus === index)?true:false;
+                            return  (
+                                <LINK href={`/${type}/${data.id}`} key={data.id}>
+                                    <a>
+                                        <Card data={data} isFocus={isFocus} type={type}/>
+                                    </a>
+                                </LINK>
+                            );})}
+                    </ContainerSlide>
+                </div>
                 :undefined
             }
         </section>

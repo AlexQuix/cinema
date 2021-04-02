@@ -23,3 +23,10 @@
     margin-left: 10px;
     color: var(--color-light);
 }
+
+.wrapper-cards{
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    overflow-x: hidden;
+}
