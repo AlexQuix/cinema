@@ -24,7 +24,7 @@
     display: inline-flex;
 }
 .wrapper-trailers > section{
-    padding-top: 20px;
+    height: 150px;
 }
 .trailer{
     cursor: pointer;
@@ -32,7 +32,6 @@
     height: 150px;
     transform: scale(1);
     position: relative;
-    bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;

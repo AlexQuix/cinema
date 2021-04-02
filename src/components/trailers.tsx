@@ -11,8 +11,7 @@ let slideStyles = <style>{`
                         .left,
                         .right{
                             width: 10vw; 
-                            height: 160px;
-                            top: 15px;
+                            height: 150px;
                             z-index: 500;
                         }
                         .left > div{
@@ -68,7 +67,7 @@ let {NEXT_PUBLIC_URL_TRAILER} = process.env;
 let fetcher = (...arch)=>fetch(arch[0]).then(res => res.json());
 
 
-function Trailer({url, showTrailer}:{url:string, showTrailer:(key:string)=>()=>void}){
+function Trailer({url, showTrailer}:{url:string, showTrailer:(trailer:Movie.Video)=>()=>void}){
     let stateSlide:ISlide= {idFocus:0,direction: undefined};
     let stateMatchmedia = {elementDisplay: 4};
     let [slide, setSlide] = useState(stateSlide);
@@ -79,23 +78,19 @@ function Trailer({url, showTrailer}:{url:string, showTrailer:(key:string)=>()=>v
     useEffect(()=>{
         function verifyMatchMedia(){
             if(matchMedia("(max-width:440px)").matches){
-                console.log(440)
                 setMatchmedia({elementDisplay: 2});
                 return;
             }
             if(matchMedia("(max-width:780px)").matches){
-                console.log(780);
                 return;
             }
             if(matchMedia("(max-width:1040px)").matches){
-                console.log(1040)
                 setMatchmedia({elementDisplay: 3});
                 return;
             }
             setMatchmedia({elementDisplay: 4});
             return;
         }
-        verifyMatchMedia();
         window.onresize = verifyMatchMedia;
     }, []);
     if(error){
@@ -132,7 +127,7 @@ function Trailer({url, showTrailer}:{url:string, showTrailer:(key:string)=>()=>v
                         <div                             
                             key={trailer.id}
                             className={style["trailer"]}
-                            onClick={showTrailer(trailer.key)}
+                            onClick={showTrailer(trailer)}
                         >
                             <img src={`${NEXT_PUBLIC_URL_TRAILER}${trailer.key}/hqdefault.jpg`} alt=""/>
                             <div className={style["play"]}>
