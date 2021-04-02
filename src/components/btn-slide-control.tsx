@@ -1,13 +1,15 @@
 import React from "react";
 
 interface Props{
+    id:string;
     direction:"left"|"right";
     slideControl:(direction:"left"|"right")=>void;
 }
 
-function BtnSlideDirection({direction, slideControl}:Props){
+function BtnSlideDirection({id, direction, slideControl}:Props){
     return (<>
         <div
+            id={id}
             className={direction}
             onClick={()=>{slideControl(direction)}}
         >

@@ -5,7 +5,7 @@ import SlideWrapperCards from "@components/slide-wrapper-cards";
 
 interface Props{
     children:any;
-    styles:JSX.Element;
+    styles:({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>string;
     slideInfo:{
         increasePosx:number,
         posxInit:number,
@@ -15,6 +15,12 @@ interface Props{
     state:[{idFocus:number, direction?:"left"|"right"}, (prop:any)=>void]
 };
 
+let getUniqueID = (base:string)=>{
+    let random = Math.floor(Math.random() * 16) + 16;
+    let firstChunck = Math.pow(Math.ceil(Math.random() * 100), 10).toString(random);
+    return base + "-" + firstChunck;
+}
+
 function ContainerSlide({
     children,
     styles,
@@ -22,6 +28,9 @@ function ContainerSlide({
     state
 }:Props){
     let [slide, setSlide] = state;
+    let btnLeft = getUniqueID("left");
+    let btnRight = getUniqueID("right");
+
     function slideControl(direction:"left"|"right"){
         if(direction === "left"){
             if(slide.idFocus > 0){
@@ -45,12 +54,12 @@ function ContainerSlide({
     return(
         <section
         >
-            <BtnSlideControl direction="left" slideControl={slideControl}/>
-            <BtnSlideControl direction="right" slideControl={slideControl}/>
+            <BtnSlideControl id={btnLeft} direction="left" slideControl={slideControl}/>
+            <BtnSlideControl id={btnRight} direction="right" slideControl={slideControl}/>
             <SlideWrapperCards slide={slide} slideInfo={slideInfo}>
                 {children}
             </SlideWrapperCards>
-            {styles}
+            <style>{styles({btnLeft, btnRight})}</style>
         </section>
     )
 }
