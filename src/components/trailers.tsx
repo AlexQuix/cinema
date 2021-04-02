@@ -62,19 +62,26 @@ let slideStyles = <style>{`
                     `}</style>;
 
 import ContainerSlide from "@container/container-slide";
+import ExhibitTrailer from "@components/exhibit-trailer";
 
 let {NEXT_PUBLIC_URL_TRAILER} = process.env;
 let fetcher = (...arch)=>fetch(arch[0]).then(res => res.json());
 
 
-function Trailer({url, showTrailer}:{url:string, showTrailer:(trailer:Movie.Video)=>()=>void}){
+function Trailer({url}:{url:string}){
     let stateSlide:ISlide= {idFocus:0,direction: undefined};
     let stateMatchmedia = {elementDisplay: 4};
     let [slide, setSlide] = useState(stateSlide);
+    let [trailer, setTrailer] = useState<Movie.Video|undefined>(undefined);
     let [matchmedia, setMatchmedia] = useState<{elementDisplay:number}>(stateMatchmedia);
 
     let {data, error} = useSWR(url, fetcher);
 
+    function showTrailer(trailer:Movie.Video){
+        return function(){
+            setTrailer(trailer);
+        }
+    }
     useEffect(()=>{
         function verifyMatchMedia(){
             if(matchMedia("(max-width:440px)").matches){
@@ -92,6 +99,10 @@ function Trailer({url, showTrailer}:{url:string, showTrailer:(trailer:Movie.Vide
             return;
         }
         window.onresize = verifyMatchMedia;
+
+        return function(){
+            window.onresize = ()=>{};
+        }
     }, []);
     if(error){
         return (
@@ -104,7 +115,7 @@ function Trailer({url, showTrailer}:{url:string, showTrailer:(trailer:Movie.Vide
         )
     }
     let trailers = data.results as Movie.Video[];
-    return (
+    return (<>
         <section
             className={style["container"]}
         >
@@ -140,7 +151,11 @@ function Trailer({url, showTrailer}:{url:string, showTrailer:(trailer:Movie.Vide
                 </ContainerSlide>
             </div>
         </section>
-    );
+        {trailer?
+            <ExhibitTrailer trailer={trailer}  setTrailer={setTrailer}/>
+            :<div style={{paddingTop: "60px"}}></div>
+        } 
+    </>);
 }
 
 export default Trailer;
