@@ -4,6 +4,7 @@
     font-size: 20px;
     --color-light-background: #484848;
     --color-light-second-background: #3d3d3d;
+    --color-dark-blue-background: #1a1d29;
     --color-dark-background: #353535;
     --color-dark-second-background: #262626;
     --color-btn-ligth: #46A3FF;
@@ -13,6 +14,7 @@
     --color-text-title-light: #83cdef;
     --color-text-highlight: #46A3FF;
     --color-text-opaque: #9f9f9f;
+    --color-text-light-second: #bebebe;
     --color-text-light: #e5e5e5;
     --color-light: #fff;
 }
@@ -36,4 +38,20 @@ body::-webkit-scrollbar{
 body::-webkit-scrollbar-thumb{
     border-radius: 5px;
     background: #c2c2c2;
+}
+
+@media (max-width:1040px) {
+    :root{
+        font-size: 18px;
+    }
+}
+@media (max-width:780px) {
+    :root{
+        font-size: 15px;
+    }
+}
+@media (max-width:440px) {
+    :root{
+        font-size: 14px;
+    }
 }
