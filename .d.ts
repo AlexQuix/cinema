@@ -16,6 +16,33 @@ interface SpokenLanguages{
     iso_639_1: string, 
     name: string
 }
+interface Cast{
+    adult: boolean,
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
+    cast_id?: number;
+    character: string;
+    credit_id: string;
+    order: number;
+}
+interface Crew{
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path?: any;
+    credit_id: string;
+    department: string;
+    job: string;
+}
 
 //////////////////////// TV SHOWS 
 declare namespace TVShow{
@@ -110,6 +137,11 @@ s
 }
 //////////////////////// MOVIE
 declare namespace Movie{
+    type Credits = {
+        id: number;
+        cast: Cast[];
+        crew: Crew[];
+    }
     interface Certifications{
         certification: string;
         iso_639_1: string;
@@ -227,4 +259,9 @@ declare namespace Image{
 declare namespace Search{
     type MovieAndTV = Movie.Search & TVShow.Search;
     type Keywords = Movie.Search | TVShow.Search | People.Search;
+    type Credits = {
+        id: number;
+        cast: Cast[];
+        crew: Crew[];
+    }
 }

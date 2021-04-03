@@ -1,0 +1,86 @@
+.container{
+    width: 100%;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 400;
+}
+.title{
+    width: 100%;
+    padding-left: 80px;
+    padding-bottom: 20px;
+}
+.title > h1{
+    font-family: "Bebas Neue";
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--color-text-title-light);
+}
+
+.wrapper-card{
+    width: 14vw;
+    height: 200px;
+    padding: 0px 5px;
+    overflow: hidden;
+}
+.card{
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    background: var(--color-text-light-second);
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.wrapper-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    filter: brightness(0.9);
+    background: var(--color-text-light);
+    display: flex;
+    place-content: center;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.wrapper-img > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.wrapper-img > svg{
+    width: 60%;
+    fill: var(--color-text-opaque);
+}
+
+.wrapper-info{
+    width: 100%;
+    padding: 15px 7px;
+    background: #fffffff8;
+    position: absolute;
+    top: 150%;
+    left: 0px;
+    display: inline-flex;
+    flex-direction: column;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.card:hover > .wrapper-info{
+    height: 100%;
+    top: 0px;
+}
+.name,
+.character{
+    margin-bottom: 7px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-opaque);
+}
+.character{
+    margin-bottom: 0px;
+    font-weight: 400;
+    overflow: hidden;
+}
