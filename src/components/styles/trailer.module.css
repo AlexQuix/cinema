@@ -40,14 +40,13 @@
 }
 .trailer:hover{
     transform: scale(1.1);
-    z-index: 300;
+    z-index: 510;
 }
 .trailer > img{
     width: 100%;
     height: 130%;
     object-fit: cover;
     object-position: center;
-    filter: brightness(0.7);
 }
 
 .play{

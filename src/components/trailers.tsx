@@ -13,7 +13,11 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
         #${btnRight}{
             width: 10vw; 
             height: 150px;
+            background: #1a1d29a8;
             z-index: 500;
+        }
+        #${btnLeft}{
+            width: 11vw;
         }
         #${btnLeft} > div{
             width: 20px;
