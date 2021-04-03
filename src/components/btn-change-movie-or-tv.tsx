@@ -1,19 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
+
+interface Props{
+    enableBtn:boolean,
+    type: "movie"|"tv";
+    changeData:(type:"movie"|"tv")=>void;
+}
 
 import style from "./styles/btn-change-movie-or-tv.module.css";
 
-function BtnChangeMovieOrTV({changeData, enableBtn}:{enableBtn:boolean,changeData:(type:"movie"|"tv")=>void}){
-    let [btn, setBtn] = useState("btn-movie");
-    function handleClick(typeBtn:"btn-movie"|"btn-tv"){
-        if(btn === typeBtn){
+function BtnChangeMovieOrTV({changeData, enableBtn, type}:Props){
+    function handleClick(typeBtn:"movie"|"tv"){
+        if(type === typeBtn){
             return;
         }
-        if(typeBtn === "btn-movie"){
-            setBtn("btn-movie");
+        if(typeBtn === "movie"){
             changeData("movie");
         }
-        if(typeBtn === "btn-tv"){
-            setBtn("btn-tv");
+        if(typeBtn === "tv"){
             changeData("tv");
         }
     }
@@ -26,7 +29,7 @@ function BtnChangeMovieOrTV({changeData, enableBtn}:{enableBtn:boolean,changeDat
             <span 
                 id='btn-movie' 
                 className={style["btn-movie"]}
-                onClick={()=>{handleClick("btn-movie")}}
+                onClick={()=>{handleClick("movie")}}
             >
                 <svg width="39" height="34" viewBox="0 0 39 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M38.6251 17.421C38.2047 16.6737 37.2239 16.3935 36.43 16.8605L31.1056 19.943L29.7512 20.737V28.1163L31.0122 28.8636C31.0589 28.8636 31.0589 28.9103 31.1056 28.9103L36.3366 31.9461C36.5701 32.1329 36.897 32.2263 37.2239 32.2263C38.1113 32.2263 38.8119 31.5257 38.8119 30.6384V24.38L38.8586 18.215C38.8586 17.9347 38.8119 17.6545 38.6251 17.421Z"/>
@@ -38,7 +41,7 @@ function BtnChangeMovieOrTV({changeData, enableBtn}:{enableBtn:boolean,changeDat
             <span 
                 id="btn-tv" 
                 className={style["btn-tv"]}
-                onClick={()=>{handleClick("btn-tv")}}
+                onClick={()=>{handleClick("tv")}}
             >
                 <svg width="39" height="33" viewBox="0 0 39 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M35.4138 25.5945H21.6966L28.6448 31.8202L27.3897 32.9595L20.1724 26.5304L12.9552 33.0002L11.7 31.8608L18.6483 25.6352H3.58621C1.61379 25.6352 0 24.1703 0 22.38V3.25543C0 1.46504 1.61379 0.00018692 3.58621 0.00018692H35.4138C37.3862 0.00018692 39 1.46504 39 3.25543V22.38C39 24.1297 37.3862 25.5945 35.4138 25.5945ZM24.2069 7.44655C24.2069 6.10376 22.9966 5.00512 21.5172 5.00512H7.62069C6.14138 5.00512 4.93103 6.10376 4.93103 7.44655V18.0261C4.93103 19.3689 6.14138 20.4675 7.62069 20.4675H21.5172C22.9966 20.4675 24.2069 19.3689 24.2069 18.0261V7.44655ZM30.931 5.98169C29.1828 5.98169 27.7931 7.2431 27.7931 8.83002C27.7931 10.417 29.1828 11.6784 30.931 11.6784C32.6793 11.6784 34.069 10.417 34.069 8.83002C34.069 7.2431 32.6793 5.98169 30.931 5.98169ZM34.5172 14.2419H27.3448V15.8695H34.5172V14.2419ZM34.5172 18.3109H27.3448V19.9385H34.5172V18.3109Z"/>
@@ -58,11 +61,11 @@ function BtnChangeMovieOrTV({changeData, enableBtn}:{enableBtn:boolean,changeDat
                     }
                 }
                 #wrapper-background{
-                    left: ${(btn === "btn-movie")?"0px":"60px"};
+                    left: ${(type === "movie")?"0px":"60px"};
                     background: var(--color-btn-ligth);
                     animation: wave 0.4s 0s cubic-bezier(0, 0, 1, 1);
                 }
-                #${btn}> svg{
+                #btn-${type}> svg{
                     fill: var(--color-light);
                 }
             `}</style>

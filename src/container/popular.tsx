@@ -99,7 +99,7 @@ function SlidePopulation(){
                     </svg>
                     <h1>What's popular</h1>
                 </header>
-                <BtnChangeMovieOrTV enableBtn={enableBtn} changeData={changeData}/>
+                <BtnChangeMovieOrTV enableBtn={enableBtn} type={type} changeData={changeData}/>
             </div>
             {(packData[0])?
                 <div className={style["wrapper-cards"]}>
