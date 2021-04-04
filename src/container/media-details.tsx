@@ -4,24 +4,22 @@ import style from "./styles/media-details.module.css";
 
 import RatingStar from "@components/rating-star";
 
-let {NEXT_PUBLIC_URL_IMG} = process.env;
-
 function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, mediatype:string}){
     let getBackground = (alphat:number)=>`linear-gradient(to right, #1a1d29 7%, rgb(26, 29, 41, ${alphat}) 100%)`;
-    let [backgroundTono, setBackgroundTono] = useState(getBackground(0));
+    let [backgroundAlpha, setBackgroundAlpha] = useState<number>(0);
     let [ageCertification, setAgeCertification] = useState({} as {iso_3166_1:string, certification:string});
 
-    function filterData<Type, P extends keyof Type>(data:Type, property:P){
-        if(data[property]){
-            return data[property]
+    function removeHyphen(date?:string){
+        let generatorDate = date?.matchAll(/[0-9]*/g);
+        if(generatorDate){
+            let year = generatorDate.next().value[0];
+            generatorDate.next();
+            let moth = generatorDate.next().value[0];
+            generatorDate.next();
+            let day = generatorDate.next().value[0];
+
+            return `${year}/${moth}/${day}`;
         }
-        return undefined;
-    }
-    function replaceCharacter(text?:string){
-        if(text && text.replaceAll){
-            return text.replaceAll("-", "/");
-        }
-        return undefined;
     }
     function convertRuntime(runtime?:number){
         if(runtime){
@@ -58,27 +56,39 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
         findAgeCertification();
     }, [])
     useEffect(()=>{
-        function handleScroll(e){
-            let aphatShades = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
+        function handleScroll(){
+            let alphatShades = [0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9];
             let scrollMeseasures = [0, 50, 100, 150, 200, 250, 300, 350];
             
-            for(let i = 0; i < scrollMeseasures.length; ++i){
-                if(window.scrollY <= scrollMeseasures[i]){
-                    let background = getBackground(aphatShades[i]);
-                    setBackgroundTono(background);
-                    break;
-                }
-            };
+            if(window.scrollY >= 350 && backgroundAlpha !== 0.9){
+                setBackgroundAlpha(0.9);
+                return;
+            }
+            if(window.scrollY <= 350){
+                for(let i = 0; i < scrollMeseasures.length; ++i){
+                    if(window.scrollY <= scrollMeseasures[i]){
+                        setBackgroundAlpha(alphatShades[i]);
+                        break;
+                    }
+                };
+                return;
+            }
+            return;
         };
+        handleScroll();
         window.onscroll = handleScroll;
-    }, [backgroundTono]);
+
+        return function(){
+            window.onscroll = ()=>{};
+        }
+    }, [backgroundAlpha]);
     return(
         <section
             className={style["container"]}
         >
             <div className={style["wrapper-img"]}>
-                <img src={(NEXT_PUBLIC_URL_IMG as string) + data.backdrop_path} alt=""/>
-                <div id="wrapper-background" style={{background: backgroundTono}}></div>
+                <img src={(process.env.NEXT_PUBLIC_URL_IMG as string) + data.backdrop_path} alt=""/>
+                <div id="wrapper-background" style={{background: getBackground(backgroundAlpha)}}></div>
                 <style jsx>{`
                     #wrapper-background{
                         width: 100%;
@@ -97,8 +107,10 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                 <div className={style["wrapper-title"]}>
                     <header>
                         <h1>
-                            {filterData(data as Movie.Details, "title")}
-                            {filterData(data as TVShow.Details, "name")}
+                            {mediatype == "movie"?
+                                (data as Movie.Details).title
+                                :(data as TVShow.Details).name
+                            }
                         </h1>
                     </header>
                 </div>
@@ -114,8 +126,10 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                     <span
                         className={style["release-date"]}
                     >
-                        {replaceCharacter(filterData(data as Movie.Details, "release_date"))}
-                        {/* {replaceCharacter(filterData(data as TVShow.Details, "first_air_date"))} */}
+                        {mediatype == "movie"?
+                            removeHyphen((data as Movie.Details).release_date)
+                            :removeHyphen((data as TVShow.Details).first_air_date)
+                        }
                     </span>
                     <span>
                         ({data.production_countries[0].iso_3166_1})
@@ -123,7 +137,7 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="9" cy="9.00018" r="9"/>
                     </svg>
-                    <span>
+                    <span className={style["genre"]}>
                         {data.genres.map((genre, index)=>{
                             let comma = (index == (data.genres.length - 1))?"":", ";
                             return <span key={genre.id}>{genre.name + comma}</span>   
@@ -133,8 +147,10 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                         <circle cx="9" cy="9.00018" r="9"/>
                     </svg>
                     <span className={style["runtime"]}>
-                        {convertRuntime(filterData(data as Movie.Details, "runtime"))}
-                        {convertRuntime(filterData(data as TVShow.Details, "episode_run_time")?.[0])}
+                        {mediatype === "movie"?
+                            convertRuntime((data as Movie.Details).runtime)
+                            :convertRuntime((data as TVShow.Details).episode_run_time[0])
+                        }
                     </span>
                 </div>
                 <div className={style["wrapper-review"]}>

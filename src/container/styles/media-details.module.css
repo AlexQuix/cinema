@@ -25,7 +25,7 @@
     width: 700px;
     padding: 40px 0px;
     padding-left: 80px;
-    padding-top: 40vh;
+    padding-top: 50vh;
     position: relative;
     z-index: 400;
     box-sizing: border-box;
@@ -62,6 +62,15 @@
     letter-spacing: 2px;
     color: var(--color-light);
     background: var(--color-text-opaque);
+}
+.release-date{
+    padding-right: 5px;
+}
+.genre{
+    max-width:260px;
+    max-height: 48px;
+    text-align: center;
+    overflow: hidden;
 }
 .wrapper-fact > svg{
     width: 0.5rem;
