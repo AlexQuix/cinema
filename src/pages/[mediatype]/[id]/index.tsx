@@ -4,6 +4,7 @@ import {InferGetServerSidePropsType, GetServerSideProps} from "next";
 import Navegation from "@container/navegation";
 import DetailsMedia from "@container/media-details";
 import Trailer from "@components/trailers";
+import Credits from "@components/credits";
 
 
 function Information({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movie.Details, mediatype:string, id:number, urlTrailer:string}){
@@ -16,6 +17,7 @@ function Information({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movi
             <Navegation/>
             <DetailsMedia data={data} mediatype={mediatype}/>
             <Trailer url={urlTrailer}/>
+            <Credits mediatype={mediatype} id={id}/>
         </div>
     </>);
 }
