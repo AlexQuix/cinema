@@ -6,7 +6,7 @@ interface ISlide{
     direction?:"left"|"right"
 }
 
-import style from "./styles/credits.module.css";
+import style from "./styles/wrapper-credits.module.css";
 
 import ContainerSlide from "@container/container-slide";
 
@@ -31,6 +31,9 @@ function Credits({mediatype, id}:{mediatype:string, id:number}){
         )
     }
     let {cast} = data as Search.Credits;
+    if(!cast[0]){
+        return <div></div>;
+    }
     let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
         return `
         #${btnLeft},
@@ -90,7 +93,6 @@ function Credits({mediatype, id}:{mediatype:string, id:number}){
             
         }
     `}
-
     return (
         <section
             className={style["container"]}

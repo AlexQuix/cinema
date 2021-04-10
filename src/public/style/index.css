@@ -29,11 +29,11 @@
 body{
     width: 100%;
     position: relative;
-    background: var(--color-dark-background);
+    background: var(--color-dark-second-background);
 }
 body::-webkit-scrollbar{
-    width: 10px;
-    background: transparent;
+    width: 8px;
+    background: var(--color-dark-second-background);
 }
 body::-webkit-scrollbar-thumb{
     border-radius: 5px;

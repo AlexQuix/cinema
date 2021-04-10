@@ -8,11 +8,7 @@ function BtnSearch(){
     let stateKeywords:Search.Keywords[] = [];
     let [isTitle, setIsTitle] = useState(true);
     let [keywords, setKeywords] = useState(stateKeywords);
-    let [isDivResult, setIsDivResult] = useState(false);
-    function handleClick(){
-        setIsDivResult(!isDivResult);
-        searchKeywords();
-    }
+    let [isKeywords, setIskeywords] = useState<boolean>(false);
     async function searchKeywords(e?){
         let urlTrending = `https://api.themoviedb.org/3/trending/all/week?api_key=36e9bc3df49bcf8ff1978a5075c591c1`;
         let url:string = urlTrending;
@@ -31,12 +27,16 @@ function BtnSearch(){
             setKeywords(results);
         }
     }
+    function handleClick(){
+        setIskeywords(!isKeywords);
+        searchKeywords();
+    }
     return (<>
         <span
             className={style["btn-search"]}
             onClick={handleClick}
         >
-            {!isDivResult?
+            {!isKeywords?
                 <div
                     className={style["search"]}
                 >
@@ -60,7 +60,7 @@ function BtnSearch(){
                 </div>
             }
         </span>
-        { isDivResult?
+        { isKeywords?
             <div
                 className={style["wrapper-search-result"]}
             >
@@ -89,7 +89,7 @@ function BtnSearch(){
                     className={style["result-keywords"]}
                 > 
                     { keywords.map(data=>
-                        <Keyword key={`${data.id}-${Math.floor(Math.random() * 100000).toString(32)}`} result={data}/>
+                        <Keyword key={`${data.id}-${Math.floor(Math.random() * 100000).toString(32)}`} result={data} setIskeywords={setIskeywords}/>
                     )}
                 </div>
             </div>:undefined

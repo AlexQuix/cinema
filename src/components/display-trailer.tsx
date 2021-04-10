@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import LINK from "next/link";
 
-import style from "./styles/exhibit-trailer.module.css";
+import style from "./styles/display-trailer.module.css";
 
 function ExhibitTrailer({trailer, setTrailer}:{trailer:Movie.Video|undefined, setTrailer:React.Dispatch<React.SetStateAction<Movie.Video | undefined>>}){
     function closeTrailer(){

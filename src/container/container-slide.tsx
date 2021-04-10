@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 
-import BtnSlideControl from "@components/btn-slide-control";
-import SlideWrapperCards from "@components/slide-wrapper-cards";
+import BtnControl from "@components/slide-btn-control";
+import WrapperCards from "@components/slide-wrapper-cards";
 
 interface Props{
     children:any;
@@ -54,11 +54,11 @@ function ContainerSlide({
     return(
         <section
         >
-            <BtnSlideControl id={btnLeft} direction="left" slideControl={slideControl}/>
-            <BtnSlideControl id={btnRight} direction="right" slideControl={slideControl}/>
-            <SlideWrapperCards slide={slide} slideInfo={slideInfo}>
+            <BtnControl id={btnLeft} direction="left" slideControl={slideControl}/>
+            <BtnControl id={btnRight} direction="right" slideControl={slideControl}/>
+            <WrapperCards slide={slide} slideInfo={slideInfo}>
                 {children}
-            </SlideWrapperCards>
+            </WrapperCards>
             <style>{styles({btnLeft, btnRight})}</style>
         </section>
     )

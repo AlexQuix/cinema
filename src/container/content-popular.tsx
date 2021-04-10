@@ -2,10 +2,10 @@ import React, {useState, useEffect} from "react";
 import useSWR from "swr";
 import LINK from "next/link";
 
-import style from "./styles/popular.module.css";
+import style from "./styles/content-popular.module.css";
 
 // IMPORT COMPONENTS
-import BtnChangeMovieOrTV from "@components/btn-change-movie-or-tv";
+import BtnMediaSelector from "@components/btn-media-selector";
 import ContainerSlide from "@container/container-slide";
 import Card from "@components/population-card";
 
@@ -20,7 +20,7 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
         #${btnRight}{
             width: 20vw; 
             height: 400px;
-            background: #35353582;
+            background: #26262682;
         }
         #${btnLeft} > div{
             width: 30px;
@@ -99,7 +99,7 @@ function SlidePopulation(){
                     </svg>
                     <h1>What's popular</h1>
                 </header>
-                <BtnChangeMovieOrTV enableBtn={enableBtn} type={type} changeData={changeData}/>
+                <BtnMediaSelector enableBtn={enableBtn} type={type} changeData={changeData}/>
             </div>
             {(packData[0])?
                 <div className={style["wrapper-cards"]}>
@@ -110,6 +110,7 @@ function SlidePopulation(){
                     >
                         {packData.map((data, index)=>{
                             let isFocus = (slide.idFocus === index)?true:false;
+                            console
                             return  (
                                 <LINK href={`/${type}/${data.id}`} key={data.id}>
                                     <a>

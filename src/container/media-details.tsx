@@ -114,15 +114,19 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                         </h1>
                     </header>
                 </div>
-                <div className={style["wrapper-rating-star"]}>
-                    <RatingStar rating={data.vote_average}/>
-                </div>
+                {data.vote_average?
+                    <div className={style["wrapper-rating-star"]}>
+                        <RatingStar rating={data.vote_average}/>
+                    </div>:undefined
+                }
                 <div className={style["wrapper-fact"]}>
-                    <span
-                        className={style["certification"]}
-                    >
-                        {ageCertification.iso_3166_1?ageCertification.certification:undefined}
-                    </span>
+                    {ageCertification.iso_3166_1 && ageCertification.certification?
+                        <span
+                            className={style["certification"]}
+                        >
+                            {ageCertification.certification}
+                        </span>:undefined
+                    }
                     <span
                         className={style["release-date"]}
                     >
@@ -131,9 +135,11 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                             :removeHyphen((data as TVShow.Details).first_air_date)
                         }
                     </span>
-                    <span>
-                        ({data.production_countries[0].iso_3166_1})
-                    </span>
+                    {data.production_countries[0]?
+                        <span>
+                            ({data.production_countries[0].iso_3166_1})
+                        </span>:undefined
+                    }
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="9" cy="9.00018" r="9"/>
                     </svg>

@@ -6,7 +6,7 @@ interface ISlide{
     direction?:"left"|"right"
 }
 
-import style from "./styles/trailer.module.css";
+import style from "./styles/wrapper-trailer.module.css";
 let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
     return `
         #${btnLeft},
@@ -67,11 +67,9 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
 `}
 
 import ContainerSlide from "@container/container-slide";
-import ExhibitTrailer from "@components/exhibit-trailer";
+import DisplayTrailer from "@components/display-trailer";
 
-let {NEXT_PUBLIC_URL_TRAILER} = process.env;
 let fetcher = (...arch)=>fetch(arch[0]).then(res => res.json());
-
 
 function Trailer({url}:{url:string}){
     let stateSlide:ISlide= {idFocus:0,direction: undefined};
@@ -119,7 +117,11 @@ function Trailer({url}:{url:string}){
             <div>Loading...</div>
         )
     }
+
     let trailers = data.results as Movie.Video[];
+    if(!trailers[0]){
+        return <div></div>;
+    }
     return (<>
         <section
             className={style["container"]}
@@ -145,7 +147,7 @@ function Trailer({url}:{url:string}){
                             className={style["trailer"]}
                             onClick={showTrailer(trailer)}
                         >
-                            <img src={`${NEXT_PUBLIC_URL_TRAILER}${trailer.key}/hqdefault.jpg`} alt=""/>
+                            <img src={`${process.env.NEXT_PUBLIC_URL_TRAILER}${trailer.key}/hqdefault.jpg`} alt=""/>
                             <div className={style["play"]}>
                                 <svg width="22" height="31" viewBox="0 0 22 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3.98587 0.674017C1.78463 -0.906831 0 0.388218 0 3.56428V27.0022C0 30.1814 1.78463 31.4748 3.98587 29.8955L20.3485 18.1469C22.5505 16.5655 22.5505 14.0034 20.3485 12.4224L3.98587 0.674017Z"/>
@@ -157,7 +159,7 @@ function Trailer({url}:{url:string}){
             </div>
         </section>
         {trailer?
-            <ExhibitTrailer trailer={trailer}  setTrailer={setTrailer}/>
+            <DisplayTrailer trailer={trailer}  setTrailer={setTrailer}/>
             :<div style={{paddingTop: "60px"}}></div>
         } 
     </>);

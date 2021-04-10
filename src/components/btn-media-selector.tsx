@@ -6,7 +6,7 @@ interface Props{
     changeData:(type:"movie"|"tv")=>void;
 }
 
-import style from "./styles/btn-change-movie-or-tv.module.css";
+import style from "./styles/btn-media-selector.module.css";
 
 function BtnChangeMovieOrTV({changeData, enableBtn, type}:Props){
     function handleClick(typeBtn:"movie"|"tv"){
