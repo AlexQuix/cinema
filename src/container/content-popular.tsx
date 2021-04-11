@@ -57,22 +57,11 @@ function getUrl(type: "movie" | "tv"){
 
 // COMPONENT
 function SlidePopulation(){
-    let stateSlide:ISlide= {idFocus:0,direction: undefined};
-    let stateType:"movie"|"tv" = "movie";
+    let [mediatype, setMediaType] = useState<"movie"|"tv">("movie");
+    let [slide, setSlide] = useState<ISlide>({idFocus:0,direction: undefined});
 
-    let [type, setType] = useState(stateType);
-    let [slide, setSlide] = useState(stateSlide);
-    let [enableBtn, setEnableBtn] = useState(true);
+    let {data, error} = useSWR(getUrl(mediatype));
 
-    let {data, error} = useSWR(getUrl(type));
-
-    function changeData(type:"movie"|"tv"){
-        setEnableBtn(false);
-        setType(type as "movie");
-        setTimeout(()=>{
-            setEnableBtn(true);
-        }, 1700);
-    }
     if(error){
         return <div>ERROR</div>
     }
@@ -99,7 +88,7 @@ function SlidePopulation(){
                     </svg>
                     <h1>What's popular</h1>
                 </header>
-                <BtnMediaSelector enableBtn={enableBtn} type={type} changeData={changeData}/>
+                <BtnMediaSelector mediatype={mediatype} setMediaType={setMediaType}/>
             </div>
             {(packData[0])?
                 <div className={style["wrapper-cards"]}>
@@ -112,9 +101,9 @@ function SlidePopulation(){
                             let isFocus = (slide.idFocus === index)?true:false;
                             console
                             return  (
-                                <LINK href={`/${type}/${data.id}`} key={data.id}>
+                                <LINK href={`/${mediatype}/${data.id}`} key={data.id}>
                                     <a>
-                                        <Card data={data} isFocus={isFocus} type={type}/>
+                                        <Card data={data} isFocus={isFocus} type={mediatype}/>
                                     </a>
                                 </LINK>
                             );})}

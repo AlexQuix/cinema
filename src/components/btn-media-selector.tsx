@@ -1,24 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 
 interface Props{
-    enableBtn:boolean,
-    type: "movie"|"tv";
-    changeData:(type:"movie"|"tv")=>void;
+    mediatype: "movie"|"tv";
+    setMediaType:React.Dispatch<React.SetStateAction<"movie" | "tv">>;
 }
 
 import style from "./styles/btn-media-selector.module.css";
 
-function BtnChangeMovieOrTV({changeData, enableBtn, type}:Props){
-    function handleClick(typeBtn:"movie"|"tv"){
-        if(type === typeBtn){
+function BtnChangeMovieOrTV({setMediaType, mediatype}:Props){
+    let [enableBtn, setEnableBtn] = useState<boolean>(true);
+    function handleClick(choiceMedia:"movie"|"tv"){
+        if(mediatype == choiceMedia){
             return;
         }
-        if(typeBtn === "movie"){
-            changeData("movie");
+        if(choiceMedia === "movie"){
+            setMediaType("movie");
         }
-        if(typeBtn === "tv"){
-            changeData("tv");
+        if(choiceMedia === "tv"){
+            setMediaType("tv");
         }
+        setEnableBtn(false);
+        setTimeout(()=>{
+            setEnableBtn(true);
+        }, 1700);
     }
     return (
         <div id={style["wrapper"]}>
@@ -61,11 +65,11 @@ function BtnChangeMovieOrTV({changeData, enableBtn, type}:Props){
                     }
                 }
                 #wrapper-background{
-                    left: ${(type === "movie")?"0px":"60px"};
+                    left: ${(mediatype === "movie")?"0px":"60px"};
                     background: var(--color-btn-ligth);
                     animation: wave 0.4s 0s cubic-bezier(0, 0, 1, 1);
                 }
-                #btn-${type}> svg{
+                #btn-${mediatype}> svg{
                     fill: var(--color-light);
                 }
             `}</style>
