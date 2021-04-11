@@ -4,6 +4,7 @@ import React from "react";
 import Navegation from "@container/navegation";
 import CoverPage from "@container/cover-page";
 import ContentPopular from "@container/content-popular";
+import Collection from "@container/collection";
 
 function Home(){
     return (
@@ -14,6 +15,7 @@ function Home(){
                 <Navegation/>
                 <CoverPage/>
                 <ContentPopular/>
+                <Collection/>
             </div>
         </>
     )
