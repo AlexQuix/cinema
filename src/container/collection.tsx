@@ -7,7 +7,7 @@ interface ISlide{
     direction?:"left"|"right"
 };
 
-import style from "./styles/content-trending.module.css";
+import style from "./styles/collection.module.css";
 
 import Card from "@components/card";
 import ContainerSlide from "@container/container-slide";

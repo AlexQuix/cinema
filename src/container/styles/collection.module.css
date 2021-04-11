@@ -1,0 +1,9 @@
+.wrapper-cards{
+    padding: 10px 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.link{
+    text-decoration: none;
+}
