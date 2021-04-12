@@ -8,7 +8,8 @@ interface ISlide{
 };
 interface Props{
     children:any, 
-    url:(mediatype:"movie"|"tv")=>string
+    url:(mediatype:"movie"|"tv")=>string,
+    choicemedia?:"movie"|"tv"
 }
 
 import style from "./styles/collection.module.css";
@@ -77,10 +78,10 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
     }
 `}
 
-function ContentTrending({children, url}:Props){
+function ContentTrending({children, url, choicemedia}:Props){
     let stateSlide:ISlide= {idFocus:0,direction: undefined};
 
-    let [mediatype, setMediatype] = useState<"movie"|"tv">("movie");
+    let [mediatype, setMediatype] = useState<"movie"|"tv">(choicemedia?choicemedia:"movie");
     let [slide, setSlide] = useState(stateSlide);
     let [countCard, setCountCard] = useState<number>(7);
 
