@@ -21,7 +21,7 @@ function Card({result, mediatype}:Props){
                     <img src={process.env.NEXT_PUBLIC_URL_IMG + data.poster_path} alt=""/>
                 </div>
                 <div className={style["wrapper-info"]}>
-                    <h1 className={style["title"]}>{data.original_title}</h1>
+                    <h1 className={style["title"]}>{data.title}</h1>
                     <h3 className={style["date"]}>{data.release_date}</h3>
                 </div>
             </div>
@@ -37,7 +37,7 @@ function Card({result, mediatype}:Props){
                 <img src={process.env.NEXT_PUBLIC_URL_IMG + data.poster_path} alt=""/>
             </div>
             <div className={style["wrapper-info"]}>
-                <h1 className={style["title"]}>{data.original_name}</h1>
+                <h1 className={style["title"]}>{data.name}</h1>
                 <h3 className={style["date"]}>{data.first_air_date}</h3>
             </div>
         </div>

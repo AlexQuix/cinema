@@ -1,8 +1,14 @@
+.container,
+.load-container{
+    width: 100%;
+    margin-top: 60px;
+    position: relative;
+}
+
 .wrapper-title,
 .load-wrapper-title{
     width: 100%;
-    padding-top: 60px;
-    padding-left: 60px;
+    padding-left: var(--space-left);
     margin-bottom: 20px;
     position: relative;
     display: flex;
@@ -15,7 +21,8 @@
 }
 .title > h1{
     margin-left: 15px;
-    font-size: 1.4rem;
+    font-family: "Bebas Neue";
+    font-size: 1.5rem;
     font-weight: 500;
     letter-spacing: 1px;
     color: var(--color-light);
@@ -37,12 +44,6 @@
 
 
 
-
-.load-container{
-    width: 100%;
-    margin-bottom: 60px;
-    position: relative;
-}
 .load-wrapper-title{
     width: 100%;
     margin-bottom: 40px;
@@ -93,4 +94,36 @@
     100%{
         background-position: 100%;
     }
+}
+
+
+@media (max-width: 1420px){
+
+}
+@media (max-width: 1040px){
+
+}
+@media (max-width: 780px){
+    .wrapper-title,
+    .load-wrapper-title{
+        margin-bottom: 10px;
+    }
+    .title > h1{
+        margin-left: 12px;
+    }
+}
+@media (max-width: 500px){
+    .wrapper-title,
+    .load-wrapper-title{
+        margin-bottom: 5px;
+    }
+    .wrapper-cards{
+        padding: 5px 0px;
+    }
+    .title > h1{
+        margin-left: 8px;
+    }
+}
+@media (max-width: 340px){
+
 }

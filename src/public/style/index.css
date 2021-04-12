@@ -2,6 +2,8 @@
 
 :root{
     font-size: 20px;
+    --space-left: 60px;
+    --space-bottom: 60px;
     --color-light-background: #484848;
     --color-light-second-background: #3d3d3d;
     --color-dark-blue-background: #1a1d29;
@@ -49,10 +51,12 @@ body::-webkit-scrollbar-thumb{
 @media (max-width:780px) {
     :root{
         font-size: 15px;
+        --space-left: 40px;
     }
 }
 @media (max-width:440px) {
     :root{
         font-size: 14px;
+        --space-left: 20px;
     }
 }

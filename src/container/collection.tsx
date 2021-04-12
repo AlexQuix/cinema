@@ -22,28 +22,28 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
     #${btnLeft},
     #${btnRight}{
         width: 8vw; 
-        height: 300px;
+        height: 100%;
         background: #26262678;
-        top: -15px;
+        top: -10px;
         z-index: 500;
     }
     #${btnRight}{
-        width: 7vw;
+        width: 7.5vw;
         border-radius: 10px 0px 0px 10px;
     }
     #${btnLeft} > div{
         width: 23px;
-        left: 30px;
+        left: 30%;
     }
     #${btnRight} > div{
         width: 23px;
-        right: 30px;
+        right: 30%;
     }
     #${btnLeft}:hover > div{
-        left: 20px;
+        left: 10%;
     }
     #${btnRight}:hover > div{
-        right: 20px;
+        right: 10%;
     }
 
     #${btnLeft} > div > svg,
@@ -51,30 +51,29 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
         fill: var(--color-light);
     }
 
-    @media (max-width: 780px){
-        #${btnLeft},
-        #${btnRight}{
-            height: 120px;
-        }
-        #${btnLeft} > div{
-            width: 18px;
-            left: 30%;
-        }
+    @media (max-width: 1080px){
+        #${btnLeft} > div,
         #${btnRight} > div{
             width: 18px;
-            right: 30%;
-        }
-        #${btnLeft}:hover > div{
-            width: 15px;
-            left: 10%;
-        }
-        #${btnRight}:hover > div{
-            width: 15px;
-            right: 10%;
         }
     }
-    @media (max-width: 440px){
-        
+    @media (max-width: 780px){
+        #${btnLeft} > div,
+        #${btnRight} > div{
+            width: 15px;
+        }
+    }
+    @media (max-width: 480px){
+        #${btnLeft} > div,
+        #${btnRight} > div{
+            width: 10px;
+        }
+        #${btnLeft} > div{
+            left: 20%;
+        }
+        #${btnRight} > div{
+            right: 20%;
+        }
     }
 `}
 
@@ -114,7 +113,7 @@ function ContentTrending({children, url, choicemedia}:Props){
         )
     }
     return (
-        <section>
+        <section className={style["container"]}>
             <div
                className={style["wrapper-title"]} 
             >
