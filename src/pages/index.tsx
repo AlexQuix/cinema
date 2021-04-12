@@ -1,4 +1,5 @@
 import React from "react";
+import HEAD from "next/head";
 
 // COMPONENTS
 import Navegation from "@container/navegation";
@@ -9,9 +10,10 @@ import BtnMediaSelector from "@components/btn-media-selector";
 
 function Home(){
     return (
-        <>  
-            <link rel="preconnect" href="https://fonts.gstatic.com"/>
-            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"></link>
+        <>  <HEAD>
+                <link rel="preconnect" href="https://fonts.gstatic.com"/>
+                <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"></link>
+            </HEAD>
             <div>
                 <Navegation/>
                 <CoverPage/>

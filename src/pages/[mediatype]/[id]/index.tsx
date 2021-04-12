@@ -1,4 +1,5 @@
 import React from "react";
+import HEAD from "next/head"
 import {InferGetServerSidePropsType, GetServerSideProps} from "next";
 
 import Navegation from "@container/navegation";
@@ -9,8 +10,10 @@ import WrapperCredits from "@components/wrapper-credits";
 
 function Information({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movie.Details, mediatype:string, id:number, urlTrailer:string}){
     return(<>
-        <link rel="preconnect" href="https://fonts.gstatic.com"/>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap&family=Bebas+Neue&display=swap&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
+        <HEAD>
+            <link rel="preconnect" href="https://fonts.gstatic.com"/>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap&family=Bebas+Neue&display=swap&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
+        </HEAD>
         <div
             style={{background:"#1a1d29", position:"relative", overflow: "hidden"}}
         >
