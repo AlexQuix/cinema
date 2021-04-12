@@ -82,17 +82,34 @@ function ContentTrending({children, url}:Props){
 
     let [mediatype, setMediatype] = useState<"movie"|"tv">("movie");
     let [slide, setSlide] = useState(stateSlide);
-    let [countCard, setCountCard] = useState<number>(6);
+    let [countCard, setCountCard] = useState<number>(7);
 
     let {data, error} = useSWR<{results: Search.MovieAndTV[]}>(url(mediatype));
     if(error){
         return (
-            <h1>Error!</h1>
+            <></>
         )
     }
     if(!data){
+        let result = [1,2,3,4,5,6,7,8,10];
         return (
-            <h1>Loading...</h1>
+            <section className={style["load-container"]}>
+                <div
+                    className={style["load-wrapper-title"]} 
+                >
+                    <div className={style["load-svg"]}></div>
+                    <div className={style["load-title"]}></div>
+                </div>
+                <div
+                    className={style["load-wrapper-cards"]}
+                >
+                    <div>
+                        {result.map(()=>
+                            <div className={style["load-card"]}></div>
+                        )}
+                    </div>
+                </div>
+            </section>
         )
     }
     return (
