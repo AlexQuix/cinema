@@ -4,7 +4,7 @@ import {InferGetServerSidePropsType, GetServerSideProps} from "next";
 
 import Navegation from "@container/navegation";
 import DetailsMedia from "@container/media-details";
-import WrapperTrailer from "@components/wrapper-trailers";
+import ContentTrailers from "@container/content-trailers";
 import WrapperCredits from "@components/wrapper-credits";
 
 
@@ -19,7 +19,15 @@ function Information({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movi
         >
             <Navegation/>
             <DetailsMedia data={data} mediatype={mediatype}/>
-            <WrapperTrailer url={urlTrailer}/>
+            <ContentTrailers
+                    url={()=>`/api/${mediatype}/trailer?typesearch=find&id=${id}`}
+                    styletype={1}
+                    children={([], style)=>(<>
+                        <header className={style["title-style-1"]}>
+                            <h1>Last Trailers</h1>
+                        </header>
+                    </>)}
+                />
             <WrapperCredits mediatype={mediatype} id={id}/>
         </div>
     </>);

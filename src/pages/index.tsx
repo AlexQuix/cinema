@@ -7,6 +7,7 @@ import CoverPage from "@container/cover-page";
 import ContentPopular from "@container/content-popular";
 import Collection from "@container/collection";
 import BtnMediaSelector from "@components/btn-media-selector";
+import ContentTrailers from "@container/content-trailers";
 
 function Home(){
     return (
@@ -20,12 +21,7 @@ function Home(){
                 <CoverPage/>
                 <ContentPopular/>
                 <Collection
-                    url={(mediatype)=>{
-                        if(mediatype == "movie"){
-                            return process.env.NEXT_PUBLIC_BASE_URL + "/trending/movie/week" + process.env.NEXT_PUBLIC_API_KEY;
-                        }
-                        return process.env.NEXT_PUBLIC_BASE_URL + "/trending/tv/week" + process.env.NEXT_PUBLIC_API_KEY;
-                    }}
+                    url={(mediatype)=>`${process.env.NEXT_PUBLIC_BASE_URL}/trending/${mediatype}/week${process.env.NEXT_PUBLIC_API_KEY}`}
                     children={function([mediatype, setMediatype], style){
                         return (<>
                             <header className={style["title"]}>
@@ -40,6 +36,19 @@ function Home(){
                             <BtnMediaSelector mediatype={mediatype} setMediaType={setMediatype}/> 
                         </>)
                     }}
+                />
+                <ContentTrailers
+                    url={(mediatype)=>`/api/${mediatype}/trailer`}
+                    styletype={2}
+                    children={([mediatype, setMediatype], style)=>(<>
+                        <header className={style["title-style-2"]}>
+                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m245.652344 111.300781c-12.214844-7.089843-26.8125-7.113281-39.050782-.066406-12.273437 7.070313-19.601562 19.761719-19.601562 33.945313v99.640624c0 14.1875 7.328125 26.875 19.605469 33.945313 6.097656 3.511719 12.78125 5.269531 19.46875 5.269531 6.726562 0 13.453125-1.777344 19.578125-5.335937l85.855468-49.816407c12.207032-7.082031 19.492188-19.75 19.492188-33.882812s-7.285156-26.800781-19.492188-33.882812zm-18.652344 131.976563v-96.554688l83.199219 48.277344zm245-34.277344v-129c0-22.054688-17.945312-40-40-40h-352c-22.054688 0-40 17.945312-40 40v230c0 22.054688 17.945312 40 40 40h352c22.054688 0 40-17.945312 40-40 0-11.046875 8.953125-20 20-20s20 8.953125 20 20c0 44.113281-35.886719 80-80 80h-352c-44.113281 0-80-35.886719-80-80v-230c0-44.113281 35.886719-80 80-80h352c44.113281 0 80 35.886719 80 80v129c0 11.046875-8.953125 20-20 20s-20-8.953125-20-20zm40 262c0 11.046875-8.953125 20-20 20h-257c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h257c11.046875 0 20 8.953125 20 20zm-337 1c0 22.089844-17.910156 40-40 40-15.214844 0-28.441406-8.496094-35.207031-21h-79.792969c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h80.957031c7.046875-11.398438 19.65625-19 34.042969-19 22.089844 0 40 17.910156 40 40zm0 0"/>
+                            </svg>
+                            <h1>Last Trailers</h1>
+                        </header>
+                        <BtnMediaSelector mediatype={mediatype} setMediaType={setMediatype}/> 
+                    </>)}
                 />
                 <Collection 
                     url={()=>"https://api.themoviedb.org/3/movie/upcoming?api_key=36e9bc3df49bcf8ff1978a5075c591c1&language=en-US&page=1"}
