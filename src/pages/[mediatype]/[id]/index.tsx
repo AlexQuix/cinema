@@ -6,14 +6,15 @@ import Navegation from "@container/navegation";
 import DetailsMedia from "@container/media-details";
 import ContentTrailers from "@container/content-trailers";
 import WrapperCredits from "@components/wrapper-credits";
+import Header from "@container/header";
 
 
-function Information({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movie.Details, mediatype:string, id:number, urlTrailer:string}){
+function Details({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movie.Details|any, mediatype:string, id:number, urlTrailer:string}){
+    if(!data.sucess){
+        return <>No found</>
+    }
     return(<>
-        <HEAD>
-            <link rel="preconnect" href="https://fonts.gstatic.com"/>
-            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap&family=Bebas+Neue&display=swap&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
-        </HEAD>
+        <Header/>
         <div
             style={{background:"#1a1d29", position:"relative", overflow: "hidden"}}
         >
@@ -61,4 +62,4 @@ export const getServerSideProps:GetServerSideProps = async function (context){
     }
 }
 
-export default Information;
+export default Details;
