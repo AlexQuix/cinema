@@ -1,0 +1,68 @@
+.trailer{
+    cursor: pointer;
+    width: 21vw;
+    height: auto;
+    padding: 0px 5px;
+    background: #000;
+    transform: scale(1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    overflow: hidden;
+}
+#trailer-style-2{
+    flex-direction: column;
+}
+
+.wrapper-poster{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper-poster > img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.play{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    position: absolute;
+    box-sizing: content-box;
+    transition: 0.5s;
+}
+.wrapper-poster:hover > .play{
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    background: var(--color-dark-second-background);
+}
+.play > svg{
+    width: 100%;
+    height: 100%;
+    padding-left: 5px;
+}
+.wrapper-poster:hover > .play > svg{
+    fill: var(--color-text-light);
+}
+
+.link{
+    max-height: 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #bebebe;
+    text-decoration: none;
+    position: relative;
+    top: -10px;
+    overflow: hidden;
+}
+.link:hover{
+    color: #fff;
+}
