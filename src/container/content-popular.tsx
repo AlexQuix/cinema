@@ -8,6 +8,7 @@ import style from "./styles/content-popular.module.css";
 import BtnMediaSelector from "@components/btn-media-selector";
 import ContainerSlide from "@container/container-slide";
 import Card from "@components/population-card";
+import LoadingEffect from "@container/loading-effect";
 
 interface ISlide{
     idFocus:number, 
@@ -66,7 +67,7 @@ function SlidePopulation(){
         return <div>ERROR</div>
     }
     if(!data){
-        return <div>Loading...</div>
+        return <LoadingEffect contentType="popular"/>
     }
     let packData:Search.MovieAndTV[] = data.results.slice(0, 10);
     let slideInfo = {

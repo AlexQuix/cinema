@@ -16,6 +16,7 @@ import style from "./styles/collection.module.css";
 
 import Card from "@components/card-media";
 import ContainerSlide from "@container/container-slide";
+import LoadingEffect from "@container/loading-effect";
 
 let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
     return `
@@ -91,25 +92,8 @@ function ContentTrending({children, url, choicemedia}:Props){
         )
     }
     if(!data){
-        let result = [1,2,3,4,5,6,7,8,10];
         return (
-            <section className={style["load-container"]}>
-                <div
-                    className={style["load-wrapper-title"]} 
-                >
-                    <div className={style["load-svg"]}></div>
-                    <div className={style["load-title"]}></div>
-                </div>
-                <div
-                    className={style["load-wrapper-cards"]}
-                >
-                    <div>
-                        {result.map(()=>
-                            <div className={style["load-card"]}></div>
-                        )}
-                    </div>
-                </div>
-            </section>
+            <LoadingEffect contentType="media"/>
         )
     }
     return (

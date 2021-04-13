@@ -18,6 +18,7 @@ import style from "./styles/content-trailers.module.css";
 import ContainerSlide from "@container/container-slide";
 import DisplayTrailer from "@components/display-trailer";
 import CardTrailer from "@components/card-trailer";
+import LoadingEffect from "@container/loading-effect";
 
 let fetcher = (...arch)=>fetch(arch[0]).then(res => res.json());
 
@@ -114,7 +115,7 @@ function ContentTrailers({url, choiceMedia, children, styletype}:Props){
     }
     if(!data){
         return (
-            <div>Loading...</div>
+            <LoadingEffect contentType={"trailer"}/>
         )
     }
     let trailers = data as Movie.Video[];
