@@ -1,0 +1,72 @@
+.container{
+    width: 100%;
+    margin-top: 60px;
+    position: relative;
+}
+
+.wrapper-title{
+    width: 100%;
+    padding-left: var(--space-left);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+.svg{
+    width: 1.6rem;
+    height: 1.8rem;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--color-dark-third-background), transparent, var(--color-dark-third-background));
+    background-size: 1000%;
+    animation: slide-degradation 1.5s infinite;
+}
+.title{
+    width: 200px;
+    height: 1.8rem;
+    margin-left: 20px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--color-dark-third-background), transparent, var(--color-dark-third-background));
+    background-size: 1000%;
+    animation: slide-degradation 1.5s infinite;
+}
+
+.wrapper-cards{
+    width: 100%;
+    overflow: hidden;
+}
+.wrapper-cards > div{
+    position: relative;
+    left: 8vw;
+    display: inline-flex;
+}
+#wrapper-cards-popular > div{
+    left: 20vw;
+}
+.card-media,
+.card-trailer,
+.card-popular{
+    width: 190px;
+    height: 250px;
+    margin: 0px 5px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--color-dark-third-background), transparent, var(--color-dark-third-background));
+    background-size: 1000%;
+    animation: slide-degradation 1.5s infinite;
+}
+.card-trailer{
+    width:  250px;
+    height: 180px;
+}
+.card-popular{
+    width: 60vw;
+    height: 450px;
+}
+
+
+@keyframes slide-degradation{
+    0%{
+        background-position: 0%;
+    }
+    100%{
+        background-position: 100%;
+    }
+}
