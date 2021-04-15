@@ -6,7 +6,8 @@ import style from "./styles/navegation.module.css";
 import BtnSearch from "@components/btn-search";
 
 function Navegation(){
-    return (
+    return (<>
+        <div className={style["nav-spacing"]}></div>
         <nav
             id={style["container"]}
         >
@@ -64,7 +65,7 @@ function Navegation(){
             </section>
             <BtnSearch/>
         </nav>
-    )
+    </>)
 };
 
 
