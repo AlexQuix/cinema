@@ -117,14 +117,7 @@ function ContentTrending({children, url, choicemedia}:Props){
                     state={[slide, setSlide]}
                 >
                     {data.results.map(data=>
-                        <LINK
-                            key={data.id}
-                            href={`/${mediatype}/${data.id}`}
-                        >
-                            <a className={style["link"]}>
-                                <Card result={data} mediatype={mediatype}/>
-                            </a>
-                        </LINK>  
+                        <Card key={data.id} href={`/${mediatype}/${data.id}`} result={data} mediatype={mediatype}/>
                     )}
                 </ContainerSlide>
             </div>

@@ -102,7 +102,7 @@ function SlidePopulation(){
                             let isFocus = (slide.idFocus === index)?true:false;
                             console
                             return  (
-                                <LINK href={`/${mediatype}/${data.id}`} key={data.id}>
+                                <LINK href={`/details/${mediatype}/${data.id}`} key={data.id}>
                                     <a>
                                         <Card data={data} isFocus={isFocus} type={mediatype}/>
                                     </a>
