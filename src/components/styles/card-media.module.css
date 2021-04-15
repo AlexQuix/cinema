@@ -1,7 +1,18 @@
 .container{
+    cursor: pointer;
     width: 10.5vw;
     padding: 0px 5px;
+    margin: 10px 0px;
     position: relative;
+    text-decoration: none;
+}
+.wrapper{
+    padding-bottom: 7px;
+    box-shadow: none;
+    transition: 0.5s;
+}
+.wrapper:hover{
+    box-shadow: 6px 6px 8px #141414, -2px -6px 8px #3f3f3f;
 }
 
 .wrapper-ratingstar{
@@ -13,7 +24,6 @@
     justify-content: center;
     z-index: 100;
 }
-
 .wrapper-ratingstar > div{
     width: 25px;
     height: 25px;
@@ -34,20 +44,21 @@
 
 .wrapper-info{
     width: 100%;
+    padding: 0px 5px;
     padding-top: 4px;
     position: relative;
 }
 .title{
     max-height: 1.7rem;
     margin-bottom: 2px;
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 0.65rem;
+    font-weight: 400;
     color: #fff;
     overflow: hidden;
 }
 .date{
     max-height: 1rem;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 400;
     color: #bebebe;
     overflow: hidden;
