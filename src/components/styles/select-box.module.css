@@ -1,0 +1,105 @@
+.container{
+    width: 100%;
+    position: relative;
+    margin-bottom: 15px;
+}
+.title{
+    margin-left: 10px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fff;
+}
+.contain{
+    width: 100%;
+    height: auto;
+    margin: 5px 0px;
+    position: relative;
+}
+.selected{
+    cursor: pointer;
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #353535;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    box-sizing: content-box;
+    border-radius: 50px;
+    transition: 0.5s;
+    transition-delay: 0.4s;
+}
+#selected-pressed{
+    border-radius: 10px 10px 0px 0px;
+    transition: 0.5s;
+}
+.arrow{
+    width: 1rem;
+    height: 1rem;
+    fill: #353535;
+    position: absolute;
+    right: 15px;
+    transition: 0.5s;
+}
+#selected-pressed > .arrow{
+    transform: rotate(90deg);
+}
+
+.wrapper-items,
+.wrapper-items-reduce{
+    width: 100%;
+    max-height: 9rem;
+    position: relative;
+    background: #e5e5e5;
+    border-radius: 0px 0px 10px 10px;
+    overflow-y: scroll;
+    animation: extendHeight 0.5s ease-in-out forwards;
+}
+.wrapper-items-reduce{
+    animation: reduceHeight 0.5s ease-in-out forwards;
+}
+.wrapper-items::-webkit-scrollbar,
+.wrapper-items-reduce::-webkit-scrollbar{
+    width: 8px;
+    background: transparent;
+}
+.wrapper-items::-webkit-scrollbar-thumb,
+.wrapper-items-reduce::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background: #46A3FF;
+}
+.item{
+    cursor: pointer;
+    display: block;
+    padding: 8px 15px;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #353535;
+    background: none;
+    transition: 0.2s;
+    box-sizing: content-box;
+}
+.item:hover{
+    color: #fff;
+    background: #46A3FF;
+}
+
+@keyframes extendHeight  {
+    0%{
+        display: block;
+        max-height: 0px;
+    }
+    100%{
+        max-height: 9rem;
+    }
+}
+@keyframes reduceHeight{
+    0%{
+        max-height: 9rem;
+    }
+    100%{
+        max-height: 0px;
+        display: none;
+    }
+}

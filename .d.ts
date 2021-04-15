@@ -265,3 +265,11 @@ declare namespace Search{
         crew: Crew[];
     }
 }
+
+
+declare namespace Data{
+    interface Item {
+        value:string|number;
+        title:string;
+    }
+}
