@@ -1,0 +1,9 @@
+.container{
+    position: relative;
+}
+.wrapper-cards{
+    margin-left: 400px;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+}
