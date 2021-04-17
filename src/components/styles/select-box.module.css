@@ -37,7 +37,7 @@
     box-sizing: content-box;
 }
 .arrow{
-    width: 1rem;
+    width: 0.9rem;
     height: 1rem;
     fill: #353535;
     position: absolute;
@@ -75,7 +75,7 @@
     cursor: pointer;
     display: block;
     padding: 8px 15px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 400;
     color: #353535;
     background: none;
@@ -103,5 +103,21 @@
     100%{
         max-height: 0px;
         display: none;
+    }
+}
+
+
+@media (max-width: 640px){
+    .selected{
+        padding: 6px 20px;
+    }
+}
+
+@media (max-width: 480px){
+    .container{
+        margin-bottom: 7px;
+    }
+    .selected{
+        padding: 6px 20px;
     }
 }

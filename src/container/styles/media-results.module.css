@@ -2,8 +2,39 @@
     position: relative;
 }
 .wrapper-cards{
-    margin-left: 400px;
+    margin-left: 380px;
+    margin-right: 40px;
     display: flex;
     justify-content: center;
     flex-flow: wrap;
+}
+.wrapper-cards > a{
+    width: 12vw;
+}
+
+@media (max-width: 1080px){
+    .wrapper-cards{
+        margin-left: 330px;
+    }
+}
+@media (max-width: 780px){
+    .wrapper-cards{
+        margin-left: 270px;
+    }
+    .wrapper-cards > a{
+        width: 17vw;
+    }
+}
+@media (max-width: 640px){
+    .wrapper-cards{
+        margin: 0px;
+    }
+    .wrapper-cards > a{
+        width: 21vw;
+    }
+}
+@media (max-width: 480px){
+    .wrapper-cards > a{
+        width: 27vw;
+    }
 }
