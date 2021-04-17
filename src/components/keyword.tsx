@@ -17,7 +17,7 @@ function Keyword({result, setIskeywords}:{result:Search.Keywords, setIskeywords:
         let data = result as TVShow.Search;
         return (
             <LINK
-                href={`/${result.media_type}/${data.id}`}
+                href={`/details/${result.media_type}/${data.id}`}
             >
                 <a
                     className={style["keyword"]}
@@ -35,7 +35,7 @@ function Keyword({result, setIskeywords}:{result:Search.Keywords, setIskeywords:
         let data = result as Movie.Search;
         return (
             <LINK
-                href={`/${result.media_type}/${data.id}`}
+                href={`/details/${result.media_type}/${data.id}`}
             >
                 <a 
                     className={style["keyword"]}

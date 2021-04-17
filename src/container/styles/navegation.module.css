@@ -25,6 +25,9 @@
     transition: 0.8s;
     text-decoration: none;
 }
+.btn:hover{
+    transform: scale(1.1);
+}
 .btn > div{
     height: 100%;
     display: flex;
@@ -37,18 +40,20 @@
     fill: var(--color-text-opaque);
     transition: 0.8s;
 }
-.btn > div > p{
-    font-size: 1rem;
+.btn > div > p,
+.del-text{
+    font-size: 1.1rem;
     font-weight: 500;
     padding-left: 10px;
     color: var(--color-text-opaque);
     transition: 0.4;
 }
-.btn:hover{
-    transform: scale(1.1);
+.del-text{
+    padding: 0px;
 }
 .btn:hover > div > svg,
-.btn:hover > div > p{
+.btn:hover > div > p,
+.btn:hover .del-text{
     fill: var(--color-light);
     color: var(--color-light);
 }
@@ -62,4 +67,43 @@
 #home-page > header > svg{
     width: 100%;
     height: 100%;
+}
+
+@media (max-width: 780px){
+    #container{
+        height: 50px;
+        padding: 8px 20px;
+    }
+    #home-page > header{
+        width: 100px;
+        margin-right: 10px;
+    }
+    .btn{
+        margin-left: 15px;
+    }
+}
+@media (max-width: 510px){
+    #container{
+        height: 40px;
+        padding: 8px 10px;
+    }
+    #home-page > header{
+        width: 70px;
+    }
+    .btn{
+        margin-left: 10px;
+    }
+    .btn > div > p{
+        padding-left: 5px;
+    }
+    .del-text{
+        display: none;
+    }
+    .btn > div > p{
+        font-size: 1rem;
+    }
+    .btn > div > svg{
+        width: 1rem;
+        height: 1rem;
+    }
 }
