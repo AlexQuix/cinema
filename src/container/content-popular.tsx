@@ -5,6 +5,7 @@ import LINK from "next/link";
 import style from "./styles/content-popular.module.css";
 
 // IMPORT COMPONENTS
+import CoverPage from "@container/cover-page";
 import BtnMediaSelector from "@components/btn-media-selector";
 import ContainerSlide from "@container/container-slide";
 import Card from "@components/population-card";
@@ -76,7 +77,8 @@ function SlidePopulation(){
         posxEnd:-((60 * (packData.length-1))-20),
         length: packData.length-1
     };
-    return (
+    return (<>
+        <CoverPage data={packData[0]}/>
         <section
             className={style["container"]}
         >
@@ -113,7 +115,7 @@ function SlidePopulation(){
                 :undefined
             }
         </section>
-    );
+    </>);
 };
 
 

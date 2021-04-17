@@ -3,7 +3,6 @@ import HEAD from "next/head";
 
 // COMPONENTS
 import Navegation from "@container/navegation";
-import CoverPage from "@container/cover-page";
 import ContentPopular from "@container/content-popular";
 import Collection from "@container/collection";
 import BtnMediaSelector from "@components/btn-media-selector";
@@ -15,7 +14,6 @@ function Home(){
         <Header/>
         <div>
             <Navegation/>
-            <CoverPage/>
             <ContentPopular/>
             <Collection
                 url={(mediatype)=>`${process.env.NEXT_PUBLIC_BASE_URL}/trending/${mediatype}/week${process.env.NEXT_PUBLIC_API_KEY}`}
