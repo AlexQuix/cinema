@@ -10,6 +10,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse){
         let resp = await fetch(url);
         let json = await resp.json();
         res.status(200).json(json);
+        return;
     }
     res.status(404).json("error");
 }

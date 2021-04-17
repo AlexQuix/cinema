@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 interface Item {
-    value:string|number, 
-    title:string
+    id:string|number, 
+    name:string
 }
 interface Props{
     state:[Item,React.Dispatch<React.SetStateAction<Item>>];
@@ -25,7 +25,7 @@ function SelectBox({state:[selectValue, setSelectValue], items, title}:Props){
                     className={style["selected"]}
                     onClick={()=>setVisibleItems(!visibleItems)}
                 >
-                    {selectValue?.title}
+                    {selectValue?.name}
                     <div className={style["arrow"]}>
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004">
                             <path d="M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12
@@ -39,7 +39,7 @@ function SelectBox({state:[selectValue, setSelectValue], items, title}:Props){
                     className={style[(visibleItems)?"wrapper-items":"wrapper-items-reduce"]}
                 >
                     {items.map((item, i)=>
-                        (item?.value !== selectValue?.value)?
+                        (item?.id !== selectValue?.id)?
                             <li 
                                 key={i}
                                 className={style["item"]}
@@ -47,7 +47,7 @@ function SelectBox({state:[selectValue, setSelectValue], items, title}:Props){
                                     setSelectValue(item);
                                     setVisibleItems(false);
                                 }}
-                            >{item.title}</li>
+                            >{item.name}</li>
                         :undefined
                     )}
                 </ul>

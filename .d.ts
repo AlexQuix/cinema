@@ -269,7 +269,7 @@ declare namespace Search{
 
 declare namespace Data{
     interface Item {
-        value:string|number;
-        title:string;
+        id:string|number;
+        name:string;
     }
 }
