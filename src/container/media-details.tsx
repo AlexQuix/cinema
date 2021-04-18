@@ -5,6 +5,7 @@ import style from "./styles/media-details.module.css";
 import RatingStar from "@components/rating-star";
 
 function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, mediatype:string}){
+    data.genres = data.genres.slice(0, 2);
     let getBackground = (alphat:number)=>`linear-gradient(to right, #1a1d29 7%, rgb(26, 29, 41, ${alphat}) 100%)`;
     let [backgroundAlpha, setBackgroundAlpha] = useState<number>(0);
     let [ageCertification, setAgeCertification] = useState({} as {iso_3166_1:string, certification:string});
@@ -114,50 +115,51 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                         </h1>
                     </header>
                 </div>
-                {data.vote_average?
-                    <div className={style["wrapper-rating-star"]}>
-                        <RatingStar rating={data.vote_average}/>
-                    </div>:undefined
-                }
                 <div className={style["wrapper-fact"]}>
-                    {ageCertification.iso_3166_1 && ageCertification.certification?
+                    <div className={style["column-1"]}>
                         <span
-                            className={style["certification"]}
+                            className={style["release-date"]}
                         >
-                            {ageCertification.certification}
-                        </span>:undefined
-                    }
-                    <span
-                        className={style["release-date"]}
-                    >
-                        {mediatype == "movie"?
-                            removeHyphen((data as Movie.Details).release_date)
-                            :removeHyphen((data as TVShow.Details).first_air_date)
+                            {mediatype == "movie"?
+                                removeHyphen((data as Movie.Details).release_date)
+                                :removeHyphen((data as TVShow.Details).first_air_date)
+                            }
+                        </span>
+                        {data.production_countries[0]?
+                            <span>
+                                ({data.production_countries[0].iso_3166_1})
+                            </span>:undefined
                         }
-                    </span>
-                    {data.production_countries[0]?
-                        <span>
-                            ({data.production_countries[0].iso_3166_1})
-                        </span>:undefined
+                    </div>
+                    {data.vote_average?
+                        <div className={style["column-2"]}>
+                            <RatingStar rating={data.vote_average}/>
+                        </div>:undefined
                     }
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="9" cy="9.00018" r="9"/>
-                    </svg>
-                    <span className={style["genre"]}>
-                        {data.genres.map((genre, index)=>{
-                            let comma = (index == (data.genres.length - 1))?"":", ";
-                            return <span key={genre.id}>{genre.name + comma}</span>   
-                        })}
-                    </span>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="9" cy="9.00018" r="9"/>
-                    </svg>
-                    <span className={style["runtime"]}>
-                        {mediatype === "movie"?
-                            convertRuntime((data as Movie.Details).runtime)
-                            :convertRuntime((data as TVShow.Details).episode_run_time[0])
+                    <div className={style["column-3"]}>
+                        {ageCertification.iso_3166_1 && ageCertification.certification?
+                            <div
+                                className={style["certification"]}
+                            >
+                                {ageCertification.certification}
+                            </div>:undefined
                         }
-                    </span>
+                        <div className={style["genre"]}>
+                            {data.genres.map((genre, index)=>{
+                                let comma = (index == (data.genres.length - 1))?"":", ";
+                                return <span key={genre.id}>{genre.name + comma}</span>   
+                            })}
+                        </div>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="9" cy="9.00018" r="9"/>
+                        </svg>
+                        <span className={style["runtime"]}>
+                            {mediatype === "movie"?
+                                convertRuntime((data as Movie.Details).runtime)
+                                :convertRuntime((data as TVShow.Details).episode_run_time[0])
+                            }
+                        </span>
+                    </div>
                 </div>
                 <div className={style["wrapper-review"]}>
                     <p>{data.overview}</p>

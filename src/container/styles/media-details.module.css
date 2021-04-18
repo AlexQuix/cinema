@@ -1,6 +1,5 @@
 .container{
     width: 100%;
-    min-height: 100vh;
 }
 
 .wrapper-img{
@@ -22,16 +21,14 @@
 
 .container-info{
     width: 700px;
-    padding: 40px 0px;
-    padding-left: 80px;
-    padding-top: 50vh;
+    padding: 50vh var(--space-left) 40px var(--space-left);
     position: relative;
     z-index: 400;
     box-sizing: border-box;
 }
 .wrapper-title{
     width: 400px;
-    margin-bottom: 30px;
+    position: relative;
 }
 .wrapper-title h1{
     letter-spacing: 3px;
@@ -41,23 +38,49 @@
     line-height: 5.5rem;
     color: var(--color-text-title-light);
 }
+
 .wrapper-fact{
     width: 100%;
-    margin-top: 10px;
+    position: relative;
+}
+.column-1,
+.column-2,
+.column-3{
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
+    position: relative;
 }
-.wrapper-fact span{
+.column-1{
+    margin-bottom: 20px;
+}
+.column-2 > div{
+    width: 40px;
+    height: 40px;
+}
+.column-1 > span,
+.column-2 > span,
+.column-3 > span,
+.genre > span{
     font-size: 1rem;
     font-weight: 500;
+    color: var(--color-text-light-second);
+}
+.column-1 > span{
     color: var(--color-text-opaque);
 }
-.wrapper-fact > .certification{
+.column-3 > svg{
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: 10px;
+    fill: var(--color-light);
+}
+.certification{
     padding: 3px 8px;
     margin-right: 10px;
     font-family: "Bebas Neue";
     font-weight: 500;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     letter-spacing: 2px;
     color: var(--color-light);
     background: var(--color-text-opaque);
@@ -66,25 +89,13 @@
     padding-right: 5px;
 }
 .genre{
-    max-width:230px;
+    max-width: 230px;
     max-height: 48px;
-    text-align: center;
+    position: relative;
     overflow: hidden;
 }
-.wrapper-fact > svg{
-    width: 0.5rem;
-    height: 0.5rem;
-    margin: 10px;
-    fill: var(--color-light);
-}
-
-.wrapper-rating-star{
-    margin: 20px 0px;
-    display: flex;
-}
-.wrapper-rating-star > div{
-    width: 45px;
-    height: 45px;
+.genre > span{
+    text-align: center;
 }
 
 .wrapper-review{
@@ -92,8 +103,61 @@
     margin-top: 40px;
 }
 .wrapper-review > p{
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 400;
     letter-spacing: 1px;
     color: var(--color-light);
 }
+
+@media (max-width: 780px) {
+    .container-info{
+        width: 100%;
+    }
+    .wrapper-title{
+        width: 70%;
+    }
+    .column-2 > div{
+        width: 35px;
+        height: 35px;
+    }
+}
+@media (max-width: 440px) {
+    .container-info{
+        width: 100%;
+        padding-top: 60vh;
+    }
+    .wrapper-title{
+        width: 90%;
+    }
+    .column-2 > div{
+        width: 25px;
+        height: 25px;
+    }
+    .wrapper-title h1{
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+    .column-1,
+    .column-2,
+    .column-3{
+        margin-bottom: 5px;
+    }
+    .column-1{
+        margin-bottom: 10px;
+    }
+    .column-1 > span,
+    .column-2 > span,
+    .column-3 > span,
+    .genre > span{
+        font-size: 0.8rem;
+    }
+    .certification{
+        padding: 3px 5px;
+        margin-right: 4px;
+        font-size: 0.7rem;
+    }
+    .wrapper-review{
+        width: 100%;
+        margin-top: 15px;
+    }
+} 
