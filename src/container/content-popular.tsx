@@ -99,7 +99,6 @@ function SlidePopulation(){
                     >
                         {packData.map((data, index)=>{
                             let isFocus = (slide.idFocus === index)?true:false;
-                            console
                             return  (
                                 <LINK href={`/details/${mediatype}/${data.id}`} key={data.id}>
                                     <a>
