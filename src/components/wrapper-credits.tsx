@@ -49,7 +49,7 @@ function Credits({mediatype, id}:{mediatype:string, id:number}){
             <header className={style["title"]}>
                 <h1>Cast</h1>
             </header>
-            <div>
+            <div className={style["set-cards"]}>
                 <ContainerSlide
                     styles={slideStyles}
                     attachInfo={{
@@ -60,7 +60,7 @@ function Credits({mediatype, id}:{mediatype:string, id:number}){
                     {cast.map((data)=>
                         <div 
                             key={data.credit_id}
-                            className={style["wrapper-card"]}
+                            className={style["container-card"]}
                         >
                             <div
                                 className={style["card"]}

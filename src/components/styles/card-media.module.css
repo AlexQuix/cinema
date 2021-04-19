@@ -118,6 +118,9 @@
     }
 }
 @media (max-width: 340px){
+    .container{
+        width: 28vw;
+    }
     .wrapper-ratingstar{
         top: -8px;
     }
