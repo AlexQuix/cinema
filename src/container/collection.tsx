@@ -79,11 +79,8 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
 `}
 
 function ContentTrending({children, url, choicemedia}:Props){
-    let stateSlide:ISlide= {idFocus:0,direction: undefined};
-
     let [mediatype, setMediatype] = useState<"movie"|"tv">(choicemedia?choicemedia:"movie");
-    let [slide, setSlide] = useState(stateSlide);
-    let [countCard, setCountCard] = useState<number>(7);
+    let [slide, setSlide] = useState<ISlide>({idFocus:0,direction: undefined});
 
     let {data, error} = useSWR<{results: Search.MovieAndTV[]}>(url(mediatype));
     if(error){
@@ -108,11 +105,8 @@ function ContentTrending({children, url, choicemedia}:Props){
             >
                 <ContainerSlide
                     styles={slideStyles}
-                    slideInfo={{
-                        increasePosx:84,
-                        posxInit:8,
-                        posxEnd:(-(84 * (Math.ceil(data.results.length/countCard)-1))+8),
-                        length:Math.ceil(data.results.length/countCard)-1
+                    attachInfo={{
+                        length:data.results.length
                     }}
                     state={[slide, setSlide]}
                 >

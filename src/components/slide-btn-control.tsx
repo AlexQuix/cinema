@@ -3,15 +3,15 @@ import React from "react";
 interface Props{
     id:string;
     direction:"left"|"right";
-    slideControl:(direction:"left"|"right")=>void;
+    checkPointer:(direction:"left"|"right")=>void;
 }
 
-function BtnSlideDirection({id, direction, slideControl}:Props){
+function BtnSlideDirection({id, direction, checkPointer}:Props){
     return (<>
         <div
             id={id}
             className={direction}
-            onClick={()=>{slideControl(direction)}}
+            onClick={()=>{checkPointer(direction)}}
         >
             <div>
                 <svg width="57" height="206" viewBox="0 0 57 206" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,31 +23,39 @@ function BtnSlideDirection({id, direction, slideControl}:Props){
             .left,
             .right{
                 cursor: pointer;
+                width: 8vw; 
+                height: 100%;
                 position: absolute;
+                left: 0px;
                 display: flex;
                 align-items: center;
-                z-index: 300;
-            }
-            .left{
-                left: 0px;
+                z-index: 500;
             }
             .right{
+                width: 7.5vw;
+                left: initial;
                 right: 0px;
             }
 
             .left > div,
             .right > div{
+                width: 23px;
+                left: 30%;
                 transform: scale(1);
                 position: absolute;
                 transition: 0.5s;
             }
             .right > div{
+                left: initial;
+                right: 30%;
                 transform: rotateZ(180deg) scale(1);
             }
             .left:hover > div{
+                left: 10%;
                 transform: scale(1.1);
             }
             .right:hover > div{
+                right: 10%;
                 transform: rotateZ(180deg) scale(1.1);
             }
 
@@ -55,11 +63,37 @@ function BtnSlideDirection({id, direction, slideControl}:Props){
             .right > div > svg{
                 width: 100%;
                 height: 100%;
+                fill: var(--color-light);
                 transition: 0.5s;
             }
             .left:hover > div > svg,
             .right:hover > div > svg{
                 fill: var(--color-light);
+            }
+
+            @media (max-width: 1080px){
+                .left > div,
+                .right > div{
+                    width: 18px;
+                }
+            }
+            @media (max-width: 780px){
+                .left > div,
+                .right > div{
+                    width: 15px;
+                }
+            }
+            @media (max-width: 480px){
+                .left > div,
+                .right > div{
+                    width: 10px;
+                }
+                .left > div{
+                    left: 20%;
+                }
+                .right > div{
+                    right: 20%;
+                }
             }
         `}</style>
     </>)

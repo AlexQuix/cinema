@@ -44,10 +44,10 @@ let buildSlideFact = (slideInfo:ISlideFact)=>{
     result.itemsDisplayed = slideInfo.itemsDisplayed;
     result.screenSizes = slideInfo.screenSizes;
     if(!result.itemsDisplayed){
-        result.itemsDisplayed = [8,7,6,5];
+        result.itemsDisplayed = [3,4,5,6,7,8];
     }
     if(!result.screenSizes){
-        result.screenSizes = [8,7,6,5];
+        result.screenSizes = [340,590,780,1100,1520];
     }
     result.pushSize = (slideInfo.pushSize)?slideInfo.pushSize:84;
     result.length = slideInfo.length;
