@@ -1,10 +1,10 @@
 .container{
     width: 100%;
-    padding-top: 80px;
+    padding-top: var(--space-left);
 }
 #wrapper-title{
     width: auto;
-    padding: 0px 40px;
+    padding-left: var(--space-left);
     display: flex;
     align-items: center;
 }
@@ -14,19 +14,37 @@
     align-items: center;
 }
 #wrapper-title > header > svg{
-    height: 1.5rem;
+    width: 1.5rem;
+    max-height: 1.5rem;
+    margin-bottom: 3px;
     fill: var(--color-stars);
 }
 #wrapper-title > header > h1{
-    font-size: 1.5rem;
+    font-family: "Bebas Neue";
+    font-size: 1.6rem;
     font-weight: 500;
+    letter-spacing: 1px;
     margin-left: 10px;
     color: var(--color-light);
 }
 
 .wrapper-cards{
     width: 100%;
-    padding-top: 50px;
-    padding-bottom: 60px;
+    padding-top: var(--space-left);
+    padding-bottom: var(--space-left);
+    position: relative;
     overflow-x: hidden;
+}
+.wrapper-cards > section{
+    position: relative;
+}
+
+@media (max-width: 440px){
+    .wrapper-cards{
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+    #wrapper-title > header{
+        margin-right: 20px;
+    }
 }

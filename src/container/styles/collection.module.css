@@ -1,7 +1,7 @@
 .container,
 .load-container{
     width: 100%;
-    margin-top: 60px;
+    margin-top: var(--space-left);
     position: relative;
 }
 
@@ -97,12 +97,6 @@
 }
 
 
-@media (max-width: 1420px){
-
-}
-@media (max-width: 1040px){
-
-}
 @media (max-width: 780px){
     .wrapper-title,
     .load-wrapper-title{
@@ -124,6 +118,12 @@
         margin-left: 8px;
     }
 }
-@media (max-width: 340px){
-
+@media (max-width: 440px){
+    .title{
+        margin-right: 20px;
+    }
+    .wrapper-title,
+    .load-wrapper-title{
+        margin-bottom: 5px;
+    }
 }

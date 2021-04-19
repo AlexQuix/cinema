@@ -21,31 +21,29 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
         #${btnLeft},
         #${btnRight}{
             width: 20vw; 
-            height: 400px;
             background: #26262682;
         }
-        #${btnLeft} > div{
-            width: 30px;
-            left: 40px;
-        }
+        #${btnLeft} > div,
         #${btnRight} > div{
             width: 30px;
-            right: 40px;
         }
-        #${btnLeft}:hover > div{
-            left: 20px;
+        @media (max-width: 780px){
+            #${btnLeft} > div,
+            #${btnRight} > div{
+                width: 25px;
+            }
         }
-        #${btnRight}:hover > div{
-            right: 20px;
+        @media (max-width: 560px){
+            #${btnLeft} > div,
+            #${btnRight} > div{
+                width: 20px;
+            }
         }
-
-        #${btnLeft} > div > svg,
-        #${btnRight} > div > svg{
-            fill: var(--color-text-opaque);
-        }
-        #${btnLeft}:hover > div > svg,
-        #${btnRight}:hover > div > svg{
-            fill: var(--color-light);
+        @media (max-width: 480px){
+            #${btnLeft} > div,
+            #${btnRight} > div{
+                width: 15px;
+            }
         }
 `}
 
@@ -71,12 +69,6 @@ function SlidePopulation(){
         return <LoadingEffect contentType="popular"/>
     }
     let packData:Search.MovieAndTV[] = data.results.slice(0, 10);
-    let slideInfo = {
-        increasePosx:60,
-        posxInit:20,
-        posxEnd:-((60 * (packData.length-1))-20),
-        length: packData.length-1
-    };
     return (<>
         <CoverPage data={packData[0]}/>
         <section
@@ -97,7 +89,12 @@ function SlidePopulation(){
                 <div className={style["wrapper-cards"]}>
                     <ContainerSlide
                         styles={slideStyles}
-                        slideInfo={slideInfo}
+                        attachInfo={{
+                            screenSizes:[2000],
+                            itemsDisplayed:[1],
+                            pushSize: 60,
+                            length: packData.length
+                        }}
                         state={[slide, setSlide]}
                     >
                         {packData.map((data, index)=>{
