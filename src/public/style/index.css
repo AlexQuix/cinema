@@ -2,6 +2,7 @@
 
 :root{
     font-size: 20px;
+    --left-btn-selector: 55px;
     --space-left: 60px;
     --space-bottom: 60px;
     --color-light-background: #484848;
@@ -60,6 +61,13 @@ body::-webkit-scrollbar-thumb{
 @media (max-width:440px) {
     :root{
         font-size: 14px;
+        --left-btn-selector: 32px;
         --space-left: 20px;
+    }
+}
+@media (max-width:320px) {
+    :root{
+        font-size: 12px;
+        --space-left: 15px;
     }
 }

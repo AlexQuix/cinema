@@ -65,7 +65,7 @@ function BtnChangeMovieOrTV({setMediaType, mediatype}:Props){
                     }
                 }
                 #wrapper-background{
-                    left: ${(mediatype === "movie")?"0px":"60px"};
+                    left: ${(mediatype === "movie")?"0px":"var(--left-btn-selector)"};
                     background: var(--color-btn-ligth);
                     animation: wave 0.4s 0s cubic-bezier(0, 0, 1, 1);
                 }
