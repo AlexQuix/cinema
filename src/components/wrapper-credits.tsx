@@ -38,61 +38,10 @@ function Credits({mediatype, id}:{mediatype:string, id:number}){
         return `
         #${btnLeft},
         #${btnRight}{
-            width: 8vw; 
-            height: 200px;
             background: #1a1d2978;
-            z-index: 500;
-        }
-        #${btnRight}{
-            width: 7vw;
-            border-radius: 10px 0px 0px 10px;
-        }
-        #${btnLeft} > div{
-            width: 23px;
-            left: 30px;
-        }
-        #${btnRight} > div{
-            width: 23px;
-            right: 30px;
-        }
-        #${btnLeft}:hover > div{
-            left: 20px;
-        }
-        #${btnRight}:hover > div{
-            right: 20px;
-        }
-
-        #${btnLeft} > div > svg,
-        #${btnRight} > div > svg{
-            fill: var(--color-light);
-        }
-
-        @media (max-width: 780px){
-            #${btnLeft},
-            #${btnRight}{
-                height: 120px;
-            }
-            #${btnLeft} > div{
-                width: 18px;
-                left: 30%;
-            }
-            #${btnRight} > div{
-                width: 18px;
-                right: 30%;
-            }
-            #${btnLeft}:hover > div{
-                width: 15px;
-                left: 10%;
-            }
-            #${btnRight}:hover > div{
-                width: 15px;
-                right: 10%;
-            }
-        }
-        @media (max-width: 440px){
-            
         }
     `}
+    
     return (
         <section
             className={style["container"]}
@@ -103,11 +52,8 @@ function Credits({mediatype, id}:{mediatype:string, id:number}){
             <div>
                 <ContainerSlide
                     styles={slideStyles}
-                    slideInfo={{
-                        increasePosx:84,
-                        posxInit:8,
-                        posxEnd:(-(84 * (Math.ceil(cast.length/matchmedia.elementDisplay)-1))+8),
-                        length:Math.ceil(cast.length/matchmedia.elementDisplay)-1
+                    attachInfo={{
+                        length:cast.length
                     }}
                     state={[slide, setSlide]}
                 >
