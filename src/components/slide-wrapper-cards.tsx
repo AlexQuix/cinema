@@ -7,11 +7,11 @@ interface SlidePos{
     length:number,
 }
 interface Props{
-    slide: {
+    point: {
         idFocus:number,
         direction?:"left"|"right"
     };
-    slideInfo:SlidePos;
+    location:SlidePos;
     children: any,
     type?: "movie" | "tv"
 }
@@ -19,29 +19,29 @@ interface Props{
 
 // COMPONENT
 function SlideWrapperCards({
-    slide,
-    slideInfo,
+    point,
+    location,
     children
 }:Props){
-    let [left, setLeft] = useState(slideInfo.posxInit);
+    let [left, setLeft] = useState(location.posxInit);
     useEffect(()=>{
-        if(slide.direction == "left"){
-            if(slide.idFocus === slideInfo.length){
-                setLeft(slideInfo.posxEnd);
+        if(point.direction == "left"){
+            if(point.idFocus === location.length){
+                setLeft(location.posxEnd);
                 return;
             }
-            setLeft(left + slideInfo.pushSize);
+            setLeft(left + location.pushSize);
             return;
         }
-        if(slide.direction == "right"){
-            if(slide.idFocus === 0){
-                setLeft(slideInfo.posxInit);
+        if(point.direction == "right"){
+            if(point.idFocus === 0){
+                setLeft(location.posxInit);
                 return;
             }
-            setLeft(left - slideInfo.pushSize);
+            setLeft(left - location.pushSize);
             return;
         }
-    }, [slide]);
+    }, [point]);
     return (<>
         <div
             style={{

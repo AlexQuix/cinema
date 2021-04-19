@@ -1,6 +1,6 @@
 .container{
     width: 100%;
-    margin-top: var(--space-bottom);
+    margin-top: var(--space-left);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -57,28 +57,27 @@
 
 
 
-/* @media (max-width: 1040px){
-    .trailer{
-        width: 21vw;
+@media (max-width: 1040px){
+    .container{
+        margin-top: 30px;
     }
     .title{
         width: 100%;
-        padding-left: 50px;
     }
 }
 @media (max-width: 780px){
-    .trailer{
-        width: 21vw;
-        height: 110px;
+    .container{
+        margin-top: 10px;
     }
-    .title{
-        width: 100%;
-        padding-left: 50px;
+    .wrapper-title{
+        margin-bottom: 10px;
     }
 }
-@media (max-width: 440px){
-    .trailer{
-        width: 39vw;
-        height: 110px;
+@media (max-width: 480px){
+    .wrapper-title{
+        margin-bottom: 10px;
     }
-} */
+    .title-style-2{
+        margin-right: 20px;
+    }
+}
