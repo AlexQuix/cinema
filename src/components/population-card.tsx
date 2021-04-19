@@ -60,7 +60,7 @@ function PopulationCard({data, isFocus, type}:{data:Search.MovieAndTV, isFocus:b
                 #focus-card{
                     cursor: pointer;
                     transform: scaleY(1.1);
-                    z-index: 300;
+                    z-index: 550;
                 }
         `}</style>
     </>)
