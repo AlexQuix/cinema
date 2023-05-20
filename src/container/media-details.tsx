@@ -1,37 +1,46 @@
-import React, {useEffect, useState} from "react";
-
 import style from "./styles/media-details.module.css";
+import React, {useEffect, useState} from "react";
 
 import RatingStar from "@components/rating-star";
 
-function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, mediatype:string}){
+function removeHyphen(date:string){
+    if(!date) return ;
+
+    let generatorDate = date.matchAll(/[0-9]*/g);
+    if(generatorDate){
+        let year = generatorDate.next().value[0];
+        generatorDate.next();
+        let moth = generatorDate.next().value[0];
+        generatorDate.next();
+        let day = generatorDate.next().value[0];
+
+        return `${year}/${moth}/${day}`;
+    }
+}
+
+function convertRuntime(runtime:number){
+    if(!runtime) return;
+
+    if(runtime >= 60){
+        let hours = Math.floor(runtime/60);
+        let min = runtime%60;
+        return `${hours?hours + "h":null} ${min?min + "m":null}`;
+    }
+    return `${runtime}m`;
+}
+
+interface IProps {
+    data: MediaDetail;
+    mediatype: MediaTypeOptions;
+}
+
+function DetailsMedia({data, mediatype}:IProps){
     data.genres = data.genres.slice(0, 2);
+
     let getBackground = (alphat:number)=>`linear-gradient(to right, #1a1d29 7%, rgb(26, 29, 41, ${alphat}) 100%)`;
     let [backgroundAlpha, setBackgroundAlpha] = useState<number>(0);
     let [ageCertification, setAgeCertification] = useState({} as {iso_3166_1:string, certification:string});
 
-    function removeHyphen(date?:string){
-        let generatorDate = date?.matchAll(/[0-9]*/g);
-        if(generatorDate){
-            let year = generatorDate.next().value[0];
-            generatorDate.next();
-            let moth = generatorDate.next().value[0];
-            generatorDate.next();
-            let day = generatorDate.next().value[0];
-
-            return `${year}/${moth}/${day}`;
-        }
-    }
-    function convertRuntime(runtime?:number){
-        if(runtime){
-            if(runtime >= 60){
-                let hours = Math.floor(runtime/60);
-                let min = runtime%60;
-                return `${hours?hours + "h":null} ${min?min + "m":null}`;
-            }
-            return `${runtime}m`;
-        }
-    }
     useEffect(()=>{
         function findAgeCertification(){
             if(mediatype == "movie"){
@@ -83,12 +92,13 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
             window.onscroll = ()=>{};
         }
     }, [backgroundAlpha]);
+
     return(
         <section
             className={style["container"]}
         >
             <div className={style["wrapper-img"]}>
-                <img src={(process.env.NEXT_PUBLIC_URL_IMG as string) + data.backdrop_path} alt=""/>
+                <img src={(process.env.NEXT_PUBLIC_IMAGE as string) + data.backdrop_path} alt=""/>
                 <div id="wrapper-background" style={{background: getBackground(backgroundAlpha)}}></div>
                 <style jsx>{`
                     #wrapper-background{
@@ -101,10 +111,7 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                     }
                 `}</style>
             </div>
-            <div
-                className={style["container-info"]}
-
-            >
+            <div className={style["container-info"]}>
                 <div className={style["wrapper-title"]}>
                     <header>
                         <h1>
@@ -117,9 +124,7 @@ function DetailsMedia({data, mediatype}:{data:Movie.Details|TVShow.Details, medi
                 </div>
                 <div className={style["wrapper-fact"]}>
                     <div className={style["column-1"]}>
-                        <span
-                            className={style["release-date"]}
-                        >
+                        <span className={style["release-date"]}>
                             {mediatype == "movie"?
                                 removeHyphen((data as Movie.Details).release_date)
                                 :removeHyphen((data as TVShow.Details).first_air_date)

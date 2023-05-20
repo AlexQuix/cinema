@@ -1,8 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 
 import style from "./styles/cover-page.module.css";
 
-function CoverPage({data}:{data:Search.MovieAndTV}){
+interface IProps {
+    data: Media
+}
+
+function CoverPage({data}:IProps){
     return (<>
         <section id="contain-img" className={style["container"]}>
             <div className={style["wrapper-text"]}>
@@ -12,7 +16,7 @@ function CoverPage({data}:{data:Search.MovieAndTV}){
         </section>
         <style>{`
             #contain-img{
-                background: url("${process.env.NEXT_PUBLIC_URL_IMG + data?.backdrop_path}");
+                background: url("${process.env.NEXT_PUBLIC_URL_IMG + data.backdrop_path}");
                 background-position: bottom;
             }
         `}</style>

@@ -1,0 +1,29 @@
+.card-video{
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.title{
+    padding: 0 0.7rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.wrapper-iframe{
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: #000;
+}
+
+.wrapper-iframe iframe{
+    width: 100%;
+    border: none;
+    outline: none;
+    z-index: 500;
+}

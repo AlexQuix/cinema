@@ -1,0 +1,18 @@
+.carousel-video{
+    width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 300;
+}
+
+.carousel-video-wrapper{
+    width: 100%;
+    position: relative;
+}
+
+.slide-viewer-wrapper{
+    margin: 0 1.4rem 0 2rem;
+    overflow-x: hidden;
+}

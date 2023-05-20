@@ -1,0 +1,7 @@
+.carousel-slide-viewer{
+    width: 100%;
+}
+
+.carousel-slide-viewer .slider{
+    display: flex;
+}

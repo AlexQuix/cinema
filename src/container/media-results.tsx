@@ -1,24 +1,34 @@
+import style from "./styles/media-results.module.css";
 import React from "react";
 import useSWR from "swr";
-import LINK from "next/link";
+import { fetcher } from "src/helpers";
 
-import style from "./styles/media-results.module.css";
-import Card from "@components/card-media"
+import CardMedia from "@components/card-media"
 
 function MediaResults({mediatype, url}){
-    let {data, error} = useSWR(`/api/${mediatype}/discover?${url}`);
-    if(error){
-        return <></>
+    let {data, error, isLoading} = useSWR(url, fetcher);
+
+    if(error || !data){
+        return (
+        <div className={style["container"]}>
+            <h1>Error</h1>
+        </div>)
     }
-    if(!data){
-        return <h1>Loading</h1>
+
+    if(isLoading){
+        return (
+        <div className={style["container"]}>
+            <h1>Loading...</h1>
+        </div>)
     }
-    let packData = data.results as Search.MovieAndTV[];
+
     return (
         <div className={style["container"]}>
             <div className={style["wrapper-cards"]}>
-                {packData.map((data)=>
-                    <Card key={data.id} href={`/${mediatype}/${data.id}`} result={data} mediatype={mediatype}></Card>
+                {data.map((data)=>
+                    <CardMedia key={data.id} 
+                        href={`/${mediatype}/${data.id}`} 
+                        data={data} />
                 )}
             </div>
         </div>

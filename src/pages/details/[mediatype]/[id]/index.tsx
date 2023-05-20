@@ -1,65 +1,70 @@
-import React from "react";
-import HEAD from "next/head"
-import {InferGetServerSidePropsType, GetServerSideProps} from "next";
+import { useParams, useRouter } from "next/navigation"
+import { GetServerSideProps } from "next";
 
 import Navegation from "@container/navegation";
 import DetailsMedia from "@container/media-details";
-import ContentTrailers from "@container/content-trailers";
-import WrapperCredits from "@components/wrapper-credits";
 import Header from "@container/header";
+import Loader from "@container/Loader";
+import LoadedCredits from "@components/LoadedData/LoadedCredits";
+import LoadedTrailer from "@components/LoadedData/LoadedTrailer";
+import LoadingEffect from "@container/loading-effect";
+
+interface IProps{
+    data: MediaDetail;
+    success: boolean;
+    media: MediaTypeOptions;
+    id: string;
+}
 
 
-function Details({data, mediatype, id, urlTrailer}:{data:TVShow.Details|Movie.Details|any, mediatype:string, id:number, urlTrailer:string}){
-    if(!data.sucess && !data.id){
-        return <>No found</>
-    }
+export default function Details({data, media, id}:IProps){
     return(<>
         <Header/>
-        <div
-            style={{background:"#1a1d29", position:"relative", overflow: "hidden"}}
-        >
+        <div style={{background:"#1a1d29", position:"relative", overflow: "hidden"}}>
             <Navegation/>
-            <DetailsMedia data={data} mediatype={mediatype}/>
-            <ContentTrailers
-                    url={()=>`/api/${mediatype}/trailer?typesearch=find&id=${id}`}
-                    styletype={1}
-                    children={([], style)=>(<>
-                        <header className={style["title-style-1"]}>
-                            <h1>Last Trailers</h1>
-                        </header>
-                    </>)}
-                />
-            <WrapperCredits mediatype={mediatype} id={id}/>
+            <DetailsMedia data={data} mediatype={"movie"}/>
+            
+            <Loader url={`/api/${media}/${id}/trailers`}>
+                <Loader.Loading>
+                    <LoadingEffect contentType="trailer"/>
+                </Loader.Loading>
+                <Loader.LoadData>
+                    <LoadedTrailer/>
+                </Loader.LoadData>
+            </Loader>
+            
+            <Loader url={`/api/${media}/${id}/credits`}>
+                <Loader.Loading>
+                    <LoadingEffect contentType="media"/>
+                </Loader.Loading>
+                <Loader.LoadData>
+                    <LoadedCredits />
+                </Loader.LoadData>
+            </Loader>
         </div>
     </>);
 }
 
-export const getServerSideProps:GetServerSideProps = async function (context){
-    let {mediatype, id} = context.query;
-    let {   NEXT_PUBLIC_URL_MOVIE, 
-            NEXT_PUBLIC_URL_TV, 
-            NEXT_PUBLIC_URL_PEOPLE, 
-            NEXT_PUBLIC_API_KEY,
-            NEXT_PUBLIC_BASE_URL,
-            NEXT_PUBLIC_URL_APPEND} = process.env;
-    let querys = {
-        movie: (id)=>`${NEXT_PUBLIC_URL_MOVIE + id + NEXT_PUBLIC_API_KEY + NEXT_PUBLIC_URL_APPEND + "release_dates"}`,
-        tv: (id)=>`${NEXT_PUBLIC_URL_TV + id + NEXT_PUBLIC_API_KEY + NEXT_PUBLIC_URL_APPEND + "content_ratings"}`,
-        people: (id)=>`${NEXT_PUBLIC_URL_PEOPLE + id + NEXT_PUBLIC_API_KEY}`
-    };
-    let url = querys[mediatype as string](id);
-    let resp = await fetch(url);
-    let json = await resp.json();
-    let data:TVShow.Details | Movie.Details = json;
-    let urlTrailer = `${NEXT_PUBLIC_BASE_URL}/${mediatype}/${id}/videos${NEXT_PUBLIC_API_KEY}`;
-    return {
-        props: {
-            data,
-            mediatype,
-            id,
-            urlTrailer
+export const getServerSideProps:GetServerSideProps = async ({query, req})=>{
+    try{
+        let { mediatype, id } = query;
+        let { host } = req.headers;
+
+        let protocol = req.headers['x-forwarded-proto'] || 'http';
+        let url = `${protocol}://${host}/api/${mediatype}/${id}/detail`;
+        let resp = await fetch(url);
+        let data = await resp.json();
+
+        let success = data?.id ? true : false;
+
+        return {
+            props: { data, success, media: mediatype, id },
+            notFound: !success
+        }
+    }catch(e){
+        return {
+            props: { },
+            notFound: true
         }
     }
 }
-
-export default Details;

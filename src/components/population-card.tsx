@@ -6,14 +6,20 @@ import style from "./styles/population-card.module.css";
 // IMPORT COMPONENTS
 import RatingStar from "./rating-star";
 import SlidePoster from "./slide-poster";
+import { isMovie } from "src/helpers";
+
+
+interface IProps {
+    data: Media;
+    isFocus: boolean;
+    type: "movie"|"tv";
+}
 
 // COMPONENT
-function PopulationCard({data, isFocus, type}:{data:Search.MovieAndTV, isFocus:boolean, type:"movie"|"tv"}){
+function PopulationCard({data, isFocus, type}:IProps){
     let typeState:Image.Backdrops[] = [];
     let [porters, setPorters] = useState(typeState);
-    function handleClick(e){
-        
-    }
+    
     useEffect(()=>{
         async function findBackdrops(){
             let resp = await fetch(`https://api.themoviedb.org/3/${type}/${data.id}/images?api_key=36e9bc3df49bcf8ff1978a5075c591c1`);
@@ -25,11 +31,11 @@ function PopulationCard({data, isFocus, type}:{data:Search.MovieAndTV, isFocus:b
         };
         findBackdrops();
     }, []);
+
     return (<>
         <div
             id={(isFocus)?"focus-card":undefined}
             className={style["container"]}
-            onClick={handleClick}
         >
             {(porters[0])?
                 <SlidePoster backdrops={porters} isFocus={isFocus}/>
@@ -41,7 +47,7 @@ function PopulationCard({data, isFocus, type}:{data:Search.MovieAndTV, isFocus:b
                 >
                     <header>
                         <h1 className={style["title"]}>
-                            {(type=="movie")?data.original_title:data.original_name}
+                            { isMovie(data) ? data.original_title : data.original_name }
                         </h1>
                     </header>
                     <div 

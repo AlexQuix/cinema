@@ -1,0 +1,15 @@
+.inner{
+    width: 100%;
+    margin: 3rem 0px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-content{
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 1rem;
+    position: relative;
+}

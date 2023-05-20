@@ -1,12 +1,28 @@
-import React, {useEffect} from "react";
-import LINK from "next/link";
-
 import style from "./styles/display-trailer.module.css";
 
-function ExhibitTrailer({trailer, setTrailer}:{trailer:Movie.Video|undefined, setTrailer:React.Dispatch<React.SetStateAction<Movie.Video | undefined>>}){
+import React from "react";
+import useSWR from "swr";
+import { fetcher } from "src/helpers";
+
+
+interface IProps {
+    trailerData: Media, 
+    setTrailer:React.Dispatch<React.SetStateAction<Movie.Video | undefined>>;
+    mediatype: MediaTypeOptions
+}
+
+
+
+function DisplayTrailer({trailerData, setTrailer, mediatype}:IProps){
     function closeTrailer(){
         setTrailer(undefined);
     }
+
+    let {data} = useSWR<ITrailer[]>(`/api/${mediatype}/${trailerData.id}/trailers`, fetcher);
+
+    if(!(data instanceof Array))
+        return (<div>Loading...</div>)
+
     return(
         <div
             className={style["container"]}
@@ -29,11 +45,11 @@ function ExhibitTrailer({trailer, setTrailer}:{trailer:Movie.Video|undefined, se
                             c5.332-5.324,7.994-11.8,7.994-19.41c0-7.618-2.662-14.086-7.994-19.417L247.244,169.59z"/>
                     </svg>
                 </div>
-                <header className={style["title"]}><h1>{trailer?.name}</h1></header>
+                <header className={style["title"]}><h1>{data[0]?.name}</h1></header>
                 <div className={style["wrapper-iframe"]}>
                     <iframe 
                         className={style["iframe"]}
-                        src={`//www.youtube.com/embed/${trailer?.key}?autoplay=1&origin=http%3A%2F%2Fwww.themoviedb.org&hl=es&modestbranding=1&fs=1&autohide=1` }
+                        src={`//www.youtube.com/embed/${data[0]?.key}?autoplay=1&origin=http%3A%2F%2Fwww.themoviedb.org&hl=es&modestbranding=1&fs=1&autohide=1` }
                     >
                     </iframe>
                 </div>
@@ -42,4 +58,4 @@ function ExhibitTrailer({trailer, setTrailer}:{trailer:Movie.Video|undefined, se
     )
 }
 
-export default ExhibitTrailer;
+export default DisplayTrailer;

@@ -119,7 +119,7 @@ function ContainerSlide({
     return(
         <section
         >
-            {(location.length>0)?<>
+            {(location.length > 0)?<>
                 <BtnControl id={btnLeft} direction="left" checkPointer={checkPointer}/>
                 <BtnControl id={btnRight} direction="right" checkPointer={checkPointer}/>
                 </>:undefined

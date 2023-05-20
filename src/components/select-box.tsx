@@ -1,31 +1,35 @@
+import style from "./styles/select-box.module.css";
 import React, {useState} from 'react';
 
 interface Item {
     id:string|number, 
     name:string
 }
-interface Props{
-    state:[Item,React.Dispatch<React.SetStateAction<Item>>];
-    items:Item[];
-    title:string;
+
+interface IProps{
+    items: Item[];
+    title: string;
+    initial: Item;
+    onSelect: (value:Item)=>void;
 }
 
-import style from "./styles/select-box.module.css";
 
-function SelectBox({state:[selectValue, setSelectValue], items, title}:Props){
-    let [visibleItems, setVisibleItems] = useState<boolean>(false);
+function SelectBox({onSelect, items, title, initial}:IProps){
+    let [selectedValue, setSelectedValue] = useState<Item>(initial);
+    let [visibility, setVisibility] = useState<boolean>(false);
+
     return (
         <div className={style["container"]}>
             <h1 className={style["title"]}>{title}</h1>
             <div 
-                id={style[(visibleItems)?"selected-pressed":""]}
+                id={style[(visibility)?"selected-pressed":""]}
                 className={style["contain"]}
             >
                 <span 
                     className={style["selected"]}
-                    onClick={()=>setVisibleItems(!visibleItems)}
+                    onClick={()=>setVisibility(!visibility)}
                 >
-                    {selectValue?.name}
+                    {selectedValue.name}
                     <div className={style["arrow"]}>
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004">
                             <path d="M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12
@@ -36,16 +40,18 @@ function SelectBox({state:[selectValue, setSelectValue], items, title}:Props){
                     </div>
                 </span>
                 <ul 
-                    className={style[(visibleItems)?"wrapper-items":"wrapper-items-reduce"]}
+                    className={style[(visibility)?"wrapper-items":"wrapper-items-reduce"]}
                 >
                     {items.map((item, i)=>
-                        (item?.id !== selectValue?.id)?
+                        (item?.id !== selectedValue.id)?
                             <li 
                                 key={i}
                                 className={style["item"]}
                                 onClick={()=>{
-                                    setSelectValue(item);
-                                    setVisibleItems(false);
+                                    setSelectedValue(item);
+                                    setVisibility(false);
+
+                                    onSelect(item);
                                 }}
                             >{item.name}</li>
                         :undefined

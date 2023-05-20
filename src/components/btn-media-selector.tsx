@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 interface Props{
     mediatype: "movie"|"tv";
-    setMediaType:React.Dispatch<React.SetStateAction<"movie" | "tv">>;
+    setMediaType: (media: MediaTypeOptions) => void;
 }
 
 import style from "./styles/btn-media-selector.module.css";

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import useSWR from "swr";
-import LINK from "next/link";
+import Link from "next/link";
+import { fetcher } from "src/helpers";
 
 import style from "./styles/content-popular.module.css";
 
@@ -8,7 +9,7 @@ import style from "./styles/content-popular.module.css";
 import CoverPage from "@container/cover-page";
 import BtnMediaSelector from "@components/btn-media-selector";
 import ContainerSlide from "@container/container-slide";
-import Card from "@components/population-card";
+import PopulationCard from "@components/population-card";
 import LoadingEffect from "@container/loading-effect";
 
 interface ISlide{
@@ -47,30 +48,20 @@ let slideStyles = ({btnLeft, btnRight}:{btnLeft:string, btnRight:string})=>{
         }
 `}
 
-function getUrl(type: "movie" | "tv"){
-    let urls = {
-        movie: process.env.NEXT_PUBLIC_URL_MOVIE + "popular" + process.env.NEXT_PUBLIC_API_KEY + "&language=en-US&page=1",
-        tv: process.env.NEXT_PUBLIC_URL_TV + "popular" + process.env.NEXT_PUBLIC_API_KEY + "&language=en-US&page=1"
-    };
-    return urls[type];
-}
-
-// COMPONENT
 function SlidePopulation(){
     let [mediatype, setMediaType] = useState<"movie"|"tv">("movie");
     let [slide, setSlide] = useState<ISlide>({idFocus:0,direction: undefined});
 
-    let {data, error} = useSWR(getUrl(mediatype));
+    let {data, error} = useSWR<Media[]>(`/api/${mediatype}/popular`, fetcher);
 
     if(error){
         return <div>ERROR</div>
     }
-    if(!data){
+    if(!(data instanceof Array)){
         return <LoadingEffect contentType="popular"/>
     }
-    let packData:Search.MovieAndTV[] = data.results.slice(0, 10);
+    let packData:Media[] = data.slice(0, 10);
     return (<>
-        <CoverPage data={packData[0]}/>
         <section
             className={style["container"]}
         >
@@ -100,11 +91,9 @@ function SlidePopulation(){
                         {packData.map((data, index)=>{
                             let isFocus = (slide.idFocus === index)?true:false;
                             return  (
-                                <LINK href={`/details/${mediatype}/${data.id}`} key={data.id}>
-                                    <a>
-                                        <Card data={data} isFocus={isFocus} type={mediatype}/>
-                                    </a>
-                                </LINK>
+                                <Link href={`/details/${mediatype}/${data.id}`} key={data.id}>
+                                    <PopulationCard data={data} isFocus={isFocus} type={mediatype}/>
+                                </Link>
                             );})}
                     </ContainerSlide>
                 </div>
